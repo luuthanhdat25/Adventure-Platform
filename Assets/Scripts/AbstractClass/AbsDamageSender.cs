@@ -12,6 +12,9 @@ namespace AbstractClass
         [SerializeField]
         protected AbsController controller;
 
+        [SerializeField] 
+        protected int damage;
+        
         protected override void LoadComponents()
         {
             base.LoadComponents();
@@ -25,9 +28,13 @@ namespace AbstractClass
         public virtual void CollisionWithController(AbsController absController)
         {
             if (absController == null) return;
-            absController.AbsStat.Deduct(controller.AbsStat.GetDamage());
+            absController.AbsHealth.Deduct(GetDamage());
             absController.AbsDamageReciver.GotHit();
         }
+
+        public void SetDamage(int damage) => this.damage = damage;
+        
+        public int GetDamage() => this.damage;
 
         public virtual List<AbsController> CheckCollision() => null;
     }

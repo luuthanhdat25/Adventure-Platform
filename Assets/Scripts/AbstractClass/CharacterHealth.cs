@@ -6,7 +6,7 @@ namespace AbstractClass
     /// <summary>
     /// Provides core functionalities like health management, damage, and death handling.
     /// </summary>
-    public class CharacterStat : AbsStat
+    public class CharacterHealth : AbsHealth
     {
         public Action OnDead;
         public EventHandler<OnHealthChangedEventArgs> OnHealthChanged;

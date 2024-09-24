@@ -1,5 +1,6 @@
 using RepeatUtils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AbstractClass
 {
@@ -24,9 +25,9 @@ namespace AbstractClass
         protected AbsVisionSensor absVisionSensor;
         public AbsVisionSensor AbsVisionSensor => absVisionSensor;
 
-        [SerializeField]
-        protected AbsStat absStat;
-        public AbsStat AbsStat => absStat;
+        [FormerlySerializedAs("absStat")] [SerializeField]
+        protected AbsHealth absHealth;
+        public AbsHealth AbsHealth => absHealth;
 
         [SerializeField]
         protected AbsDamageReciver absDamageReciver;
@@ -41,10 +42,10 @@ namespace AbstractClass
         {
             base.LoadComponents();
             LoadComponentInChild<AbsGraphic>(ref absGraphic, gameObject);
-            LoadComponentInChild<AbsAnimator>(ref absAnimator, gameObject);
             LoadComponentInChild<AbsMovement>(ref absMovement, gameObject);
             LoadComponentInChild<AbsVisionSensor>(ref absVisionSensor, gameObject);
-            LoadComponentInChild<AbsStat>(ref absStat, gameObject);
+            LoadComponentInChild<AbsHealth>(ref absHealth, gameObject);
+            LoadComponent<AbsAnimator>(ref absAnimator, gameObject);
             LoadComponent<AbsDamageSender>(ref absDamageSender, gameObject);
             LoadComponent<AbsDamageReciver>(ref absDamageReciver, gameObject);
         }

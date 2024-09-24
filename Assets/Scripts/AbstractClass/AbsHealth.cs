@@ -1,3 +1,4 @@
+using System;
 using RepeatUtils;
 using Unity.VisualScripting;
 
@@ -6,8 +7,16 @@ namespace AbstractClass
     /// <summary>
     /// Abstract base class for managing entity stats.
     /// </summary>
-    public abstract class AbsStat : RepeatMonoBehaviour
+    public abstract class AbsHealth : RepeatMonoBehaviour
     {
+        public Action OnDead;
+        public EventHandler<OnHealthChangedEventArgs> OnHealthChanged;
+
+        public class OnHealthChangedEventArgs : EventArgs
+        {
+            public int HealthUpdated;
+        }
+        
         public virtual void Deduct(int hpDeduct)
         {
             return;
