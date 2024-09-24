@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterAnimation : MonoBehaviour
 {
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +17,5 @@ public class CharacterAnimation : MonoBehaviour
     {
         
     }
+
 }

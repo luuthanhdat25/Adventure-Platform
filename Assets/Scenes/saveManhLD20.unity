@@ -484,7 +484,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 0.6935157
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -622,6 +622,7 @@ GameObject:
   - component: {fileID: 1648471528}
   - component: {fileID: 1648471527}
   - component: {fileID: 1648471526}
+  - component: {fileID: 1648471530}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -737,7 +738,7 @@ Animator:
   m_GameObject: {fileID: 1648471518}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8bc7a6cf8dfb9314e814e978e1c4110f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -817,10 +818,12 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  dashingVelocity: 20
-  dashingTime: 0
+  dashingVelocity: 8
+  dashingTime: 0.2
   dashCooldown: 0
   checkGround: -0.76
+  playerAnimation: {fileID: 0}
+  isDashing: 0
 --- !u!114 &1648471527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -860,6 +863,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   absController: {fileID: 0}
+--- !u!114 &1648471530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648471518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598804cc6f71ec54c909e72a93219d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1648471524}
 --- !u!1 &2102351289
 GameObject:
   m_ObjectHideFlags: 0
