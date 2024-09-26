@@ -14,13 +14,14 @@ public class EnemyMovement : AbsMovement
 
     public override void Move(Vector3 moveDirectionOrDestination, float speed)
     {
+        moveDirectionOrDestination = moveDirectionOrDestination.normalized;
         rigidbody2D.velocity = new Vector2(moveDirectionOrDestination.x * speed, rigidbody2D.velocity.y);
     }
 
     public override void Rotate(Vector3 rotateDirection)
     {
-        Vector3 currentScale = transform.parent.localScale;
-        currentScale.x *= -1f;
-        transform.parent.localScale = currentScale;
+        Quaternion currentRotation = transform.parent.rotation;
+        Quaternion flippedRotation = Quaternion.Euler(currentRotation.eulerAngles.x, currentRotation.eulerAngles.y + 180f, currentRotation.eulerAngles.z);
+        transform.parent.rotation = flippedRotation;
     }
 }
