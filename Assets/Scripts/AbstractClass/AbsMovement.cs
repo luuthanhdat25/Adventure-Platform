@@ -18,6 +18,14 @@ namespace AbstractClass
         {
             return;
         } 
+
+        public virtual void Flip()
+        {
+            Vector3 currentScale = transform.localScale;
+            currentScale.x *= -1f;
+            transform.localScale = currentScale;
+        }
+
     }
 }
 

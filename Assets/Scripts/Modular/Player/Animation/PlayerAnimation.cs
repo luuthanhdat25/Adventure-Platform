@@ -8,127 +8,58 @@ public class PlayerAnimation : AbsAnimator
 {
     [SerializeField] private Animator animator;
 
-    private bool isJumping = false;
-    private float jumpStartTime = 0f;
-    private float jumpDuration = 0f;
+    private Rigidbody2D rigidbody2D;
+    private PlayerMovement playerMovement;
+
+
+    private enum PlayerAnimationParameter
+    {
+        PlayerSpeed,
+        IsDash,
+        JumpVectorVertical,
+        IsJump,
+        AttackComboNumber,
+        IsAttack,
+    }
+
+    private void Start()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
-        var inputManagerVector = InputManager.Instance.GetRawInputNormalized();
-        UpdateMovementAnimation(inputManagerVector.x);
-        JumpAnimationHandler(inputManagerVector.y > 0);
+        RunAnimationHandler();
         DashAnimationHandler();
+        JumpAnimationHandler();
+        AttackAnimationHandler();
     }
 
-    private enum PlayerAnimationEnum
+    private void RunAnimationHandler()  
     {
-        Idle,
-        Run,
-        Jump,
-        Dash
-    }
-
-    private enum PlayerAnimationParameterEnum
-    {
-        PlayerSpeed,
-        IsJump,
-        IsDash,
-    }
-
-    public override void PlayAnimation(string animationName, bool loop)
-    {
-        animator.SetBool("Loop", loop);
-        animator.Play(animationName);
-    }
-
-    public override void SetTimeScale(float timeScale)
-    {
-        base.SetTimeScale(timeScale);
-    }
-
-    public override void SetBool(string paramName, bool value)
-    {
-        base.SetBool(paramName, value);
-    }
-
-    private void UpdateMovementAnimation(float speed)
-    {
-        animator.SetFloat(PlayerAnimationParameterEnum.PlayerSpeed.ToString(), Math.Abs(speed));
-    }
-
-    public void JumpAnimationHandler(bool isJump)
-    {
-        if (Singleton<PlayerController>.Instance.IsGround())
+        if (playerMovement.IsGround())
         {
-            HandleLanding();
+            animator.SetFloat(PlayerAnimationParameter.PlayerSpeed.ToString(), Math.Abs(InputManager.Instance.GetRawInputNormalized().x));
         }
-        else
-        {
-            HandleJumping(isJump);
-        }
-
-        animator.SetBool(PlayerAnimationParameterEnum.IsJump.ToString(), isJumping);
     }
     private void DashAnimationHandler()
     {
-        animator.SetBool(PlayerAnimationParameterEnum.IsDash.ToString(), Singleton<PlayerController>.Instance.isDashing);
-        //animator.Play(PlayerAnimationEnum.Dash.ToString(), 0, Singleton<PlayerController>.Instance.dashingTime);
+        animator.SetBool(PlayerAnimationParameter.IsDash.ToString(), playerMovement.isDashing);
     }
-    private void HandleLanding()
+    private void JumpAnimationHandler()
     {
-        if (isJumping)
+        animator.SetBool(PlayerAnimationParameter.IsJump.ToString(), !playerMovement.IsGround());
+        animator.SetFloat(PlayerAnimationParameter.JumpVectorVertical.ToString(),rigidbody2D.velocity.y);
+
+    }
+    private void AttackAnimationHandler()
+    {
+        if (!playerMovement.isAttackCombo && InputManager.Instance.IsAttackHold())
         {
-            isJumping = false;
-            PlayAnimation(PlayerAnimationEnum.Idle.ToString(), true);
+            animator.SetTrigger(PlayerAnimationParameter.IsAttack.ToString());
+            animator.SetFloat(PlayerAnimationParameter.AttackComboNumber.ToString(),playerMovement.combo);
         }
     }
 
-    private void HandleJumping(bool isJump)
-    {
-        if (isJumping)
-        {
-            float elapsedTime = Time.time - jumpStartTime;
-            float normalizedTime = elapsedTime / jumpDuration;
-            animator.Play(PlayerAnimationEnum.Jump.ToString(), 0, normalizedTime);
-        }
-        else if (isJump)
-        {
-            StartJump();
-        }
-    }
-
-    private void StartJump()
-    {
-        isJumping = true;
-        jumpStartTime = Time.time;
-        jumpDuration = GetJumpDuration();
-        PlayAnimation(PlayerAnimationEnum.Jump.ToString(), false);
-    }
-
-    private float GetJumpDuration()
-    {
-        float duration = 0f;
-        while (!Singleton<PlayerController>.Instance.IsGround())
-        {
-            duration += Time.deltaTime;
-            if (duration > 1f) break;
-        }
-        return duration;
-    }
-
-    public override float GetAnimationDuration(string animationName, int layerIndex = 0)
-    {
-        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
-
-        foreach (AnimationClip clip in clips)
-        {
-            if (clip.name == animationName)
-            {
-                return clip.length;
-            }
-        }
-
-        Debug.LogWarning($"Animation '{animationName}' not found in Animator.");
-        return 0f;
-    }
 }
