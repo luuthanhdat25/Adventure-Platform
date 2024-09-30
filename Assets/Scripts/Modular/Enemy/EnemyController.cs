@@ -1,85 +1,52 @@
 using AbstractClass;
-using Manager;
 using MBT;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : AbsController
 {
     [SerializeField] 
-    private float speed = 10f;
+    private float baseMoveSpeed = 2f;
 
+	[SerializeField]
+	private float chaseMoveSpeed = 4f;
+
+	[SerializeField]
+    private Transform centerPoint;
+    
+    [Header("[Attack]")]
     [SerializeField]
     private float attackRadius = 2f;
 
     [SerializeField]
-    private Vector2 attackOffset;
+    private Transform attackPoint;
 
     [SerializeField]
     private LayerMask playerLayerMark;
 
-    [SerializeField]
-    private float perceptionDistance;
-
     private bool isMovingRight = true;
     private EnemyAnimator enemyAnimator;
-    private Blackboard blackboard;
+    private EnemyMoveStateEnum moveState = EnemyMoveStateEnum.Normal;
 
-    private void Start()
+	private void Start()
     {
         enemyAnimator = absAnimator as EnemyAnimator;
-        LoadComponent(ref blackboard, gameObject);
-        var playerPosition = blackboard.GetVariable<Vector2Variable>("AttackPlayerPosition");
-        playerPosition.Value = Random.insideUnitCircle;
     }
 
-    /*void FixedUpdate()
+    public float GetAttackRange()
     {
-        var inputDirection = InputManager.Instance.GetRawInputNormalized();
-        MoveHorizontal(inputDirection);
-    }*/
+        return Vector2.Distance(centerPoint.position, GetAttackPointPosition());
+    }
 
-    void FixedUpdate()
+	public void MoveHorizontal(Vector2 inputDirection)
     {
-        RaycastHit2D hit = Physics2D.Raycast(GetAttackPointPosition(), transform.right, perceptionDistance, playerLayerMark);
-        var playerPosition = blackboard.GetVariable<Vector2Variable>("AttackPlayerPosition");
-        var isSeePlayer = blackboard.GetVariable<BoolVariable>("IsSeePlayer");
-        if (hit.collider != null)
+        if(moveState == EnemyMoveStateEnum.Normal)
         {
-            //Debug.Log($"Hit {hit.collider.name} at position {hit.point}");
-            Debug.DrawRay(GetAttackPointPosition(), transform.right * perceptionDistance, Color.red);
-            Debug.DrawRay(GetAttackPosition(hit.point), Vector3.up * 5, Color.black);
-
-            playerPosition.Value = GetAttackPosition(hit.point);
-            isSeePlayer.Value = true;
+            absMovement.Move(inputDirection, baseMoveSpeed);
         }
         else
         {
-            Debug.DrawRay(GetAttackPointPosition(), transform.right * perceptionDistance, Color.green);
-            isSeePlayer.Value = false;
+            absMovement.Move(inputDirection, chaseMoveSpeed);
         }
-    }
-
-    private Vector2 GetAttackPosition(Vector2 playerPosition)
-    {
-        var attackPosition = playerPosition;
-        attackPosition.y = transform.position.y;
-        float attackDiff = attackRadius;
-        var vectorDirection = playerPosition - (Vector2)transform.position;
-        if(vectorDirection.x < 0)
-        {
-            attackPosition.x += attackDiff;
-        }
-        else
-        {
-            attackPosition.x -= attackDiff;
-        }
-        return attackPosition;
-    }
-
-    public void MoveHorizontal(Vector2 inputDirection)
-    {
-        absMovement.Move(inputDirection, speed);
             
         if (inputDirection != Vector2.zero)
         {
@@ -111,7 +78,7 @@ public class EnemyController : AbsController
         absAnimator.SetTrigger(EnemyAnimatorParameterEnum.Attack.ToString());
     }
 
-    public void Attack()
+    public void TraceDamage()
     {
         Debug.Log("Attack");
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(GetAttackPointPosition(), attackRadius, playerLayerMark);
@@ -126,14 +93,9 @@ public class EnemyController : AbsController
         }
     }
 
-    private Vector2 GetAttackPointPosition()
-    {
-        float yPos = transform.position.y + attackOffset.y;
-        float xPos = isMovingRight? transform.position.x + attackOffset.x : transform.position.x - attackOffset.x;
-        return new Vector2(xPos, yPos);
-    }
+	private Vector2 GetAttackPointPosition() => attackPoint.position;
 
-    public void Destroy()
+	public void Destroy()
     {
         Destroy(gameObject);
     }
@@ -142,5 +104,10 @@ public class EnemyController : AbsController
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(GetAttackPointPosition(), attackRadius);
+    }
+
+    public void ChangeMoveState(EnemyMoveStateEnum enemyMoveStateEnum)
+    {
+        this.moveState = enemyMoveStateEnum;
     }
 }

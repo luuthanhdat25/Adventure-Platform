@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 460903649}
   - component: {fileID: 460903648}
   - component: {fileID: 460903647}
-  - component: {fileID: 460903643}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -142,22 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &460903643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 460903636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 0}
-  repeatOnFinish: 0
-  maxExecutionsPerTick: 1
-  parent: {fileID: 0}
 --- !u!61 &460903647
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -445,12 +428,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515478696}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.41, y: -2.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 773269745}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -544,6 +527,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &773269744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 773269745}
+  m_Layer: 0
+  m_Name: Golem_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &773269745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773269744}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 962181799}
+  - {fileID: 515478697}
+  - {fileID: 3137730313124071274}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &892201878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 892201879}
+  m_Layer: 0
+  m_Name: CenterPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &892201879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892201878}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.173, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3137730313124071274}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &962181798
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,12 +616,43 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 962181798}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.12, y: -2.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 773269745}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1326133773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1326133774}
+  m_Layer: 0
+  m_Name: AttackPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1326133774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326133773}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.183, y: -0.31, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3137730313124071274}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1813128601
 GameObject:
@@ -666,8 +745,13 @@ GameObject:
   - component: {fileID: 9178206605260766720}
   - component: {fileID: 9178206605260766725}
   - component: {fileID: 9178206605260766726}
+  - component: {fileID: 9178206605260766727}
+  - component: {fileID: 9178206605260766729}
+  - component: {fileID: 9178206605260766728}
+  - component: {fileID: 9178206605260766731}
+  - component: {fileID: 9178206605260766730}
   m_Layer: 0
-  m_Name: Golem_1
+  m_Name: Golem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -786,7 +870,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599287913239485771}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.25, y: -1.61, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
@@ -795,7 +879,9 @@ Transform:
   - {fileID: 3060018216790686421}
   - {fileID: 9097252978589545495}
   - {fileID: 3106017642261033910}
-  m_Father: {fileID: 0}
+  - {fileID: 892201879}
+  - {fileID: 1326133774}
+  m_Father: {fileID: 773269745}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3705925331262307239
 GameObject:
@@ -1048,13 +1134,14 @@ MonoBehaviour:
   absHealth: {fileID: 573496876143531377}
   absDamageReciver: {fileID: 1437020244357721499}
   absDamageSender: {fileID: 9178206605260766701}
-  speed: 2
+  baseMoveSpeed: 2
+  chaseMoveSpeed: 4
+  centerPoint: {fileID: 892201879}
   attackRadius: 1.5
-  attackOffset: {x: 0.49, y: -1.52}
+  attackPoint: {fileID: 1326133774}
   playerLayerMark:
     serializedVersion: 2
     m_Bits: 8
-  perceptionDistance: 10
 --- !u!114 &9178206605260766707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,7 +1167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 9178206605260766726}
+  selectedEditorNode: {fileID: 9178206605260766730}
   repeatOnFinish: 0
   maxExecutionsPerTick: 1
   parent: {fileID: 0}
@@ -1099,8 +1186,8 @@ MonoBehaviour:
   title: Wait
   rect:
     serializedVersion: 2
-    x: 621.5999
-    y: 727.50006
+    x: 760.7998
+    y: 729.1001
     width: 160
     height: 44
   parent: {fileID: 9178206605260766713}
@@ -1131,11 +1218,11 @@ MonoBehaviour:
   title: Loop
   rect:
     serializedVersion: 2
-    x: 282.40002
-    y: 393.09995
+    x: 283.20004
+    y: 397.89966
     width: 160
     height: 44
-  parent: {fileID: 9178206605260766712}
+  parent: {fileID: 9178206605260766727}
   children:
   - {fileID: 9178206605260766723}
   behaviourTree: {fileID: 0}
@@ -1171,13 +1258,13 @@ MonoBehaviour:
   title: Root
   rect:
     serializedVersion: 2
-    x: 305.6
-    y: 265.90002
+    x: 288
+    y: 239.50002
     width: 160
     height: 44
   parent: {fileID: 0}
   children:
-  - {fileID: 9178206605260766711}
+  - {fileID: 9178206605260766727}
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
@@ -1203,6 +1290,7 @@ MonoBehaviour:
   parent: {fileID: 9178206605260766723}
   children:
   - {fileID: 9178206605260766718}
+  - {fileID: 9178206605260766730}
   - {fileID: 9178206605260766717}
   - {fileID: 9178206605260766710}
   behaviourTree: {fileID: 0}
@@ -1225,6 +1313,7 @@ MonoBehaviour:
   - {fileID: 9178206605260766716}
   - {fileID: 9178206605260766715}
   - {fileID: 9178206605260766721}
+  - {fileID: 9178206605260766729}
   masterBlackboard: {fileID: 0}
 --- !u!114 &9178206605260766715
 MonoBehaviour:
@@ -1269,8 +1358,8 @@ MonoBehaviour:
   title: Move To Position
   rect:
     serializedVersion: 2
-    x: 452.09998
-    y: 726.30066
+    x: 587.2998
+    y: 727.90063
     width: 160
     height: 44
   parent: {fileID: 9178206605260766713}
@@ -1300,8 +1389,8 @@ MonoBehaviour:
   title: Find Random Patrol Position Ground
   rect:
     serializedVersion: 2
-    x: 282.4999
-    y: 719.1004
+    x: 274.4999
+    y: 727.9004
     width: 160
     height: 59
   parent: {fileID: 9178206605260766713}
@@ -1345,8 +1434,8 @@ MonoBehaviour:
   title: Move To Attack Position
   rect:
     serializedVersion: 2
-    x: -310.39993
-    y: 739.99963
+    x: -314.3999
+    y: 743.19965
     width: 160
     height: 44
   parent: {fileID: 9178206605260766722}
@@ -1360,7 +1449,7 @@ MonoBehaviour:
     blackboard: {fileID: 9178206605260766714}
     key: AttackPlayerPosition
     constantValue: {x: 0, y: 0}
-  minDistance: 0.05
+  minDistance: 1
 --- !u!114 &9178206605260766721
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1390,12 +1479,14 @@ MonoBehaviour:
   title: Sequence
   rect:
     serializedVersion: 2
-    x: -79.19998
-    y: 655.99976
+    x: -67.19998
+    y: 648.7997
     width: 160
     height: 44
   parent: {fileID: 9178206605260766724}
   children:
+  - {fileID: 9178206605260766728}
+  - {fileID: 9178206605260766731}
   - {fileID: 9178206605260766720}
   - {fileID: 9178206605260766725}
   - {fileID: 9178206605260766726}
@@ -1418,8 +1509,8 @@ MonoBehaviour:
   title: Selector
   rect:
     serializedVersion: 2
-    x: 303.2
-    y: 498.40012
+    x: 280
+    y: 508.80005
     width: 160
     height: 44
   parent: {fileID: 9178206605260766711}
@@ -1491,8 +1582,8 @@ MonoBehaviour:
   title: Attack (Abs Controller)
   rect:
     serializedVersion: 2
-    x: -105.5999
-    y: 741.6
+    x: -127.199875
+    y: 745.6
     width: 160
     height: 44
   parent: {fileID: 9178206605260766722}
@@ -1515,7 +1606,7 @@ MonoBehaviour:
   title: Wait
   rect:
     serializedVersion: 2
-    x: 61.600037
+    x: 46.400055
     y: 746.40027
     width: 160
     height: 44
@@ -1532,14 +1623,157 @@ MonoBehaviour:
     constantValue: 2
   randomDeviation: 0
   continueOnRestart: 0
+--- !u!114 &9178206605260766727
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599287913239485771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d25fccf9bcc2f4aa15aa59257f5f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Ground Scan Service
+  rect:
+    serializedVersion: 2
+    x: 286.3999
+    y: 316.80035
+    width: 160
+    height: 44
+  parent: {fileID: 9178206605260766712}
+  children:
+  - {fileID: 9178206605260766711}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  interval: 1
+  randomDeviation: 0
+  callOnEnter: 1
+  startPoint: {fileID: 892201879}
+  distance: 10
+  targetPosition:
+    useConstant: 0
+    mode: 0
+    blackboard: {fileID: 9178206605260766714}
+    key: PlayerPosition
+    constantValue: {x: 0, y: 0}
+  isSeePlayer:
+    useConstant: 0
+    mode: 0
+    blackboard: {fileID: 9178206605260766714}
+    key: IsSeePlayer
+    constantValue: 0
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &9178206605260766728
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599287913239485771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51651badc054ea49878141e22c3592f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Calculate Attack Position
+  rect:
+    serializedVersion: 2
+    x: -657.5997
+    y: 738.40027
+    width: 160
+    height: 44
+  parent: {fileID: 9178206605260766722}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  attackPosition:
+    useConstant: 0
+    mode: 0
+    blackboard: {fileID: 9178206605260766714}
+    key: AttackPlayerPosition
+    constantValue: {x: 0, y: 0}
+  targetPosition:
+    useConstant: 0
+    mode: 0
+    blackboard: {fileID: 9178206605260766714}
+    key: PlayerPosition
+    constantValue: {x: 0, y: 0}
+--- !u!114 &9178206605260766729
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599287913239485771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa62ce5e63cc9d45ae0efc52561ace7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: PlayerPosition
+  val: {x: 0, y: 0}
+--- !u!114 &9178206605260766730
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599287913239485771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fc7cbf7f998224caf8c30f94902842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Change Move State (AbsController)
+  rect:
+    serializedVersion: 2
+    x: 416.80023
+    y: 730.4008
+    width: 160
+    height: 59
+  parent: {fileID: 9178206605260766713}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  moveState: 0
+--- !u!114 &9178206605260766731
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599287913239485771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fc7cbf7f998224caf8c30f94902842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Change Move State (AbsController)
+  rect:
+    serializedVersion: 2
+    x: -475.9996
+    y: 744.00085
+    width: 160
+    height: 59
+  parent: {fileID: 9178206605260766722}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  moveState: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 3137730313124071274}
   - {fileID: 460903652}
   - {fileID: 466933394}
   - {fileID: 1813128603}
-  - {fileID: 515478697}
-  - {fileID: 962181799}
+  - {fileID: 773269745}

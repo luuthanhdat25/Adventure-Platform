@@ -6,8 +6,12 @@ using UnityEngine;
 [MBTNode("Datlt/Move To Position (Abs Controller)", 100)]
 public class MoveToPosition : Leaf
 {
-    public Vector2Reference targetPosition;
-    public float minDistance = 0f;
+    [SerializeField]
+    private Vector2Reference targetPosition;
+
+	[SerializeField]
+    private float minDistance = 0f;
+    
     private EnemyController controller;
     private Vector2 moveDirection;
 
