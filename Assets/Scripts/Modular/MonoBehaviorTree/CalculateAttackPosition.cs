@@ -1,4 +1,3 @@
-using AbstractClass;
 using MBT;
 using UnityEngine;
 
@@ -12,22 +11,22 @@ public class CalculateAttackPosition : Leaf
 	[SerializeField]
 	private Vector2Reference targetPosition;
 
-	private EnemyController controller;
+	private IAttack attacker;
 
 	private void Start()
 	{
-		controller = GetComponent<AbsController>() as EnemyController;
-		if (controller == null)
+		attacker = GetComponent<IAttack>();
+		if (attacker == null)
 		{
-			Debug.LogError($"Gameobject: {gameObject.name} doesn't have {typeof(EnemyController).Name}");
+			Debug.LogError($"Gameobject: {gameObject.name} doesn't have {typeof(IAttack).Name}");
 		}
 	}
 
 	public override NodeResult Execute()
 	{
-		var attackPos = targetPosition.Value;
+		Vector2 attackPos = targetPosition.Value;
 		var vectorDirection = targetPosition.Value - (Vector2)transform.position;
-		var attackRange = controller.GetAttackRange();
+		var attackRange = attacker.GetAttackRange();
 		if (vectorDirection.x < 0)
 		{
 			attackPos.x += attackRange;
@@ -37,6 +36,7 @@ public class CalculateAttackPosition : Leaf
 			attackPos.x -= attackRange;
 		}
 		attackPosition.Value = attackPos;
+		DebugShape.DrawCircle(attackPos, 0.5f, 2f, Color.red);
 		return NodeResult.success;
 	}
 }

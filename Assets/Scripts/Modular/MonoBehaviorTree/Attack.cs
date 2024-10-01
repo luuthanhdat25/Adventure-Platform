@@ -8,21 +8,21 @@ using UnityEngine;
 [MBTNode("Datlt/Attack (Abs Controller)", 200)]
 public class Attack : Leaf
 {
-    private EnemyController controller;
+    private IAttack attacker;
 
     private void Start()
     {
-        controller = GetComponent<AbsController>() as EnemyController;
-        if (controller == null)
+        attacker = GetComponent<IAttack>();
+        if (attacker == null)
         {
-            Debug.LogError($"Gameobject: {gameObject.name} doesn't have {typeof(EnemyController).Name}");
+            Debug.LogError($"Gameobject: {gameObject.name} doesn't have {typeof(IAttack).Name}");
         }
     }
 
     public override NodeResult Execute()
     {
-        if (controller == null) return NodeResult.failure;
-        controller.PlayAttackAnimation();
+        if (attacker == null) return NodeResult.failure;
+        attacker.RequestAttack();
         return NodeResult.success;
     }
 }

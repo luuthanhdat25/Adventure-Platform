@@ -1,113 +1,43 @@
 using AbstractClass;
-using MBT;
 using UnityEngine;
 
-public class EnemyController : AbsController
+public abstract class EnemyController : AbsController, IMovable, IAttack
 {
     [SerializeField] 
-    private float baseMoveSpeed = 2f;
+    protected float baseMoveSpeed = 2f;
 
 	[SerializeField]
-	private float chaseMoveSpeed = 4f;
-
-	[SerializeField]
-    private Transform centerPoint;
+    protected Transform centerPoint;
     
-    [Header("[Attack]")]
     [SerializeField]
-    private float attackRadius = 2f;
+    protected LayerMask playerLayerMark;
 
-    [SerializeField]
-    private Transform attackPoint;
-
-    [SerializeField]
-    private LayerMask playerLayerMark;
-
-    private bool isMovingRight = true;
-    private EnemyAnimator enemyAnimator;
-    private EnemyMoveStateEnum moveState = EnemyMoveStateEnum.Normal;
+    protected bool isMovingRight = true;
+    protected float moveSpeed;
 
 	private void Start()
     {
-        enemyAnimator = absAnimator as EnemyAnimator;
+        moveSpeed = baseMoveSpeed;
     }
 
-    public float GetAttackRange()
-    {
-        return Vector2.Distance(centerPoint.position, GetAttackPointPosition());
-    }
+    public abstract float GetAttackRange();
+	public abstract void TraceDamage();
+    public abstract void Move(Vector2 direction);
 
-	public void MoveHorizontal(Vector2 inputDirection)
-    {
-        if(moveState == EnemyMoveStateEnum.Normal)
-        {
-            absMovement.Move(inputDirection, baseMoveSpeed);
-        }
-        else
-        {
-            absMovement.Move(inputDirection, chaseMoveSpeed);
-        }
-            
-        if (inputDirection != Vector2.zero)
-        {
-            enemyAnimator.SetBool(EnemyAnimatorParameterEnum.IsWalking.ToString(), true);
-        }
-        else
-        {
-            enemyAnimator.SetBool(EnemyAnimatorParameterEnum.IsWalking.ToString(), false);
-        }
-
-        if (!isMovingRight && inputDirection.x > 0)
-        {
-            Flip();
-        }
-        else if (isMovingRight && inputDirection.x < 0)
-        {
-            Flip();
-        }
-    }
-
-    private void Flip()
+    protected virtual void Flip()
     {
         isMovingRight = !isMovingRight;
         absMovement.Rotate(Vector2.left);
     }
-
-    public void PlayAttackAnimation()
-    {
-        absAnimator.SetTrigger(EnemyAnimatorParameterEnum.Attack.ToString());
-    }
-
-    public void TraceDamage()
-    {
-        Debug.Log("Attack");
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(GetAttackPointPosition(), attackRadius, playerLayerMark);
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("We hit " + enemy.name);
-            var beAttackController = enemy.GetComponent<AbsController>();
-            if(beAttackController != null)
-            {
-                AbsDamageSender.CollisionWithController(beAttackController);
-            }
-        }
-    }
-
-	private Vector2 GetAttackPointPosition() => attackPoint.position;
 
 	public void Destroy()
     {
         Destroy(gameObject);
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(GetAttackPointPosition(), attackRadius);
-    }
+	public virtual void ChangeMoveSpeed(float speed) => this.moveSpeed = speed;
 
-    public void ChangeMoveState(EnemyMoveStateEnum enemyMoveStateEnum)
-    {
-        this.moveState = enemyMoveStateEnum;
-    }
+	public virtual void RequestAttack() => absAnimator.SetTrigger(EnemyAnimatorParameterEnum.Attack.ToString());
+
+	public AbsController GetController() => this;
 }

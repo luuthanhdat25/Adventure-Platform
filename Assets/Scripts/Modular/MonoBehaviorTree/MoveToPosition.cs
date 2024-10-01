@@ -3,7 +3,7 @@ using MBT;
 using UnityEngine;
 
 [AddComponentMenu("")]
-[MBTNode("Datlt/Move To Position (Abs Controller)", 100)]
+[MBTNode("Datlt/Move To Position", 100)]
 public class MoveToPosition : Leaf
 {
     [SerializeField]
@@ -12,13 +12,13 @@ public class MoveToPosition : Leaf
 	[SerializeField]
     private float minDistance = 0f;
     
-    private EnemyController controller;
+    private IMovable movable;
     private Vector2 moveDirection;
 
     private void Start()
     {
-        controller = GetComponent<AbsController>() as EnemyController;
-        if (controller == null)
+        movable = GetComponent<AbsController>() as EnemyController;
+        if (movable == null)
         {
             Debug.LogError($"Gameobject: {gameObject.name} doesn't have {typeof(EnemyController).Name}");
         }
@@ -26,17 +26,17 @@ public class MoveToPosition : Leaf
         
     public override NodeResult Execute()
     {
-        if (controller == null) return NodeResult.failure;
+        if (movable == null) return NodeResult.failure;
 
         if (!IsTargetReached())
         {
             moveDirection = targetPosition.Value - (Vector2)transform.position; 
-            controller.MoveHorizontal(moveDirection);
+            movable.Move(moveDirection);
             return NodeResult.running;
         }
         else
         {
-            controller.MoveHorizontal(Vector2.zero);
+            movable.Move(Vector2.zero);
             return NodeResult.success;
         }
     }
