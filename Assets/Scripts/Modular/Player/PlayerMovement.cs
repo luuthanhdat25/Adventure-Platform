@@ -1,17 +1,60 @@
+﻿using AbstractClass;
 using System.Collections;
-using System.Collections.Generic;
-using AbstractClass;
 using UnityEngine;
 
 public class PlayerMovement : AbsMovement
 {
-    public override void Move(Vector3 moveDirectionOrDestination, float speed)
+    
+    [SerializeField] 
+    private float jumpForce = 5f;
+    
+    [SerializeField] 
+    private LayerMask groundLayer;
+    
+    [SerializeField] 
+    private float dashingVelocity, dashingTime, dashCooldown;
+    
+    [SerializeField] 
+    private float checkGround;
+    
+    [SerializeField] 
+    private Rigidbody2D rigidbody2D;
+
+    private bool isJumping, canDash = true;
+    private bool isDashing = false;
+    public bool IsDashing => isDashing;
+
+    public Vector2 GetVelocity() => rigidbody2D.velocity;
+
+    public void JumpHandler(float inputY)
     {
-        throw new System.NotImplementedException();
+        if (inputY > 0)
+        {
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, jumpForce);
+        }
     }
 
-    public override void Rotate(Vector3 rotateDirection)
+    public override void Move(Vector3 moveDirection, float speed)
     {
-        throw new System.NotImplementedException();
+        rigidbody2D.velocity = new Vector2(moveDirection.x * speed, rigidbody2D.velocity.y);
+    }
+
+    public void Dash()
+    {
+        if (!canDash) return;
+        StartCoroutine(DashCoroutine());
+    }
+
+    private IEnumerator DashCoroutine()
+    {
+        canDash = false;
+        isDashing = true;
+        rigidbody2D.gravityScale = 0f;
+        rigidbody2D.velocity = new Vector2(transform.parent.localScale.x * dashingVelocity, 0f);
+        yield return new WaitForSeconds(dashingTime);
+        isDashing = false;
+        rigidbody2D.gravityScale = 1f;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 }

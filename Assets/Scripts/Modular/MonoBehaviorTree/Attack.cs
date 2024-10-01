@@ -6,7 +6,7 @@ using UnityEngine;
 
 [AddComponentMenu("")]
 [MBTNode("Datlt/Attack (Abs Controller)", 200)]
-public class Attack : Leaf
+public class TraceDame : Leaf
 {
     private IAttack attacker;
 

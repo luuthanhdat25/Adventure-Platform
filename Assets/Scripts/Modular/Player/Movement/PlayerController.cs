@@ -1,116 +1,82 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using AbstractClass;
 using Manager;
-using modeling.Defination;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : AbsController
 {
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float jumpForced = 5f;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] public float dashingVelocity, dashingTime,dashCooldown;
-    [SerializeField] private float checkGround;
-    [SerializeField] private PlayerAnimation playerAnimation;
+    [SerializeField] 
+    private float speed = 5f;
 
+    [SerializeField]
+    private PlayerCombo playerCombo;
 
-    private bool isJumping = false;
-    private float jumpStartTime = 0f;
-    private float jumpDuration = 0f;
-    public bool isDashing = false;
-    private bool canDash = true;
-    private bool isGroundedCheck = true;
+    [SerializeField]
+    private LayerMask groundLayer;
 
-    private enum PlayerAnimationEnum
-    {
-        Idle,
-        Run,
-        Jump
-    }
+    [SerializeField]
+    private float checkGroundYOffSet;
 
-    private Rigidbody2D rigidbody2D;
-    private TrailRenderer trailRenderer;
-    
+    [SerializeField]
+    private float groundCheckRadius = 0.2f;
+
+    private PlayerMovement playerMovement;
     private bool isMovingRight = true;
 
     private void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        playerAnimation = GetComponent<PlayerAnimation>();
-        // trailRenderer = GetComponent<TrailRenderer>();
+        playerMovement = absMovement as PlayerMovement;
     }
-    
+
     private void FixedUpdate()
     {
-        if(isDashing) return;
-        isGroundedCheck = IsGround();
+        absAnimator.SetBool(PlayerAnimationParameter.IsDash.ToString(), playerMovement.IsDashing);
 
-        var inputDirection = InputManager.Instance.GetRawInputNormalized();
-        if(inputDirection.x != 0 && isGroundedCheck)
-        {
+        absAnimator.SetFloat(PlayerAnimationParameter.JumpVectorVertical.ToString(), playerMovement.GetVelocity().y);
 
-            rigidbody2D.velocity = new Vector2(inputDirection.x * speed, rigidbody2D.velocity.y);
-        }
-        else
-        {
-            rigidbody2D.velocity = new Vector2(inputDirection.x * speed, rigidbody2D.velocity.y);
-        }
 
-        if (!isMovingRight && inputDirection.x > 0)
+        if (playerMovement.IsDashing) return;
+        var inputVector = InputManager.Instance.GetRawInputNormalized();
+
+        playerMovement.Move(inputVector, speed);
+
+        if (inputVector.x > 0 && !isMovingRight || inputVector.x < 0 && isMovingRight)
         {
-            Flip();
-        }else if (isMovingRight && inputDirection.x < 0)
-        {
-            Flip();
+            isMovingRight = !isMovingRight;
+            absMovement.Flip();
         }
 
-        if (inputDirection.y > 0 && isGroundedCheck)
+        if (InputManager.Instance.IsDashInputTrigger())
         {
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,jumpForced);
+            playerMovement.Dash();
         }
 
-        if (InputManager.Instance.GetDashInputTrigger())
+        if (InputManager.Instance.IsAttackPressed())
         {
-            if (canDash)
-            {
-                StartCoroutine(DashHandler());
-            }
+            playerCombo.HandleCombo();
         }
-        
+
+        bool isGround = IsGround();
+        if (isGround)
+        {
+            Debug.Log(Math.Abs(inputVector.x));
+            playerMovement.JumpHandler(inputVector.y);
+            absAnimator.SetFloat(PlayerAnimationParameter.PlayerSpeed.ToString(), Math.Abs(inputVector.x));
+        }
+
+        absAnimator.SetBool(PlayerAnimationParameter.IsJump.ToString(), !isGround);
     }
-    
-    public void ActionHandler()
-    {
-        
-    }
-    
+
     public bool IsGround()
     {
-        var x = new Vector3(transform.position.x,transform.position.y + checkGround);
-        return Physics2D.OverlapCircle(x,0.2f,groundLayer) ;
+        Vector3 groundCheckPos = new Vector3(transform.position.x, transform.position.y + checkGroundYOffSet);
+        return Physics2D.OverlapCircle(groundCheckPos, groundCheckRadius, groundLayer);
     }
 
-    private void Flip()
+    private void OnDrawGizmosSelected()
     {
-        isMovingRight = !isMovingRight;
-        Vector3 currentScale = transform.localScale;
-        currentScale.x *= -1f;
-        transform.localScale = currentScale;
+        Gizmos.color = Color.red;
+        Vector3 groundCheckPos = new Vector3(transform.position.x, transform.position.y + checkGroundYOffSet);
+        Gizmos.DrawWireSphere(groundCheckPos, groundCheckRadius);
     }
-    private IEnumerator DashHandler()
-    {
-        canDash = false;
-        isDashing = true;
-        rigidbody2D.gravityScale = 0f;
-        rigidbody2D.velocity = new Vector2(transform.localScale.x * dashingVelocity,0f);
-        yield return new WaitForSeconds(dashingTime);
-        isDashing = false;
-        rigidbody2D.gravityScale = 1f;
-        canDash = true;
-    }
-    
 }

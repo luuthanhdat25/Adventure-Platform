@@ -27,6 +27,11 @@ namespace AbstractClass
             return;
         }
 
+        public virtual void SetFloat(string paraName, float value)
+        {
+            return;
+        }
+
         public virtual float GetAnimationDuration(string animationName, int layerIndex = 0)
         {
             return 0;

@@ -41,11 +41,11 @@ namespace Manager
             return inputVector;
         }
 
-        public bool GetDashInputTrigger()
-        {
-            
-            return inputSystemSetting.Player.Dash.IsPressed();
-        }
+        public bool IsDashInputTrigger() =>inputSystemSetting.Player.Dash.IsPressed();
+        
+        public bool IsAttackPressed() => inputSystemSetting.Player.Attack.IsPressed();
+
+        public bool IsAttackHold() => inputSystemSetting.Player.Attack.IsInProgress();
 
         public bool IsShootPressed() => inputSystemSetting.Player.Shoot.IsPressed();
 
