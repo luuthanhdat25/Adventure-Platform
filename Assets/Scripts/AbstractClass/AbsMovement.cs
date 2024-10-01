@@ -9,7 +9,11 @@ namespace AbstractClass
     public abstract class AbsMovement : RepeatMonoBehaviour
     {
         public abstract void Move(Vector3 moveDirectionOrDestination, float speed);
-        public abstract void Rotate(Vector3 rotateDirection);
+        
+        public virtual void Rotate(Vector3 rotateDirection)
+        {
+            return;
+        }
 
         /// <summary>
         /// Resets the movement state of the object.
@@ -21,11 +25,10 @@ namespace AbstractClass
 
         public virtual void Flip()
         {
-            Vector3 currentScale = transform.localScale;
-            currentScale.x *= -1f;
-            transform.localScale = currentScale;
+            Quaternion currentRotation = transform.parent.rotation;
+            Quaternion flippedRotation = Quaternion.Euler(currentRotation.eulerAngles.x, currentRotation.eulerAngles.y + 180f, currentRotation.eulerAngles.z);
+            transform.parent.rotation = flippedRotation;
         }
-
     }
 }
 
