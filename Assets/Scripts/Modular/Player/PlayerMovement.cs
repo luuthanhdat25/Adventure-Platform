@@ -10,9 +10,14 @@ public class PlayerMovement : AbsMovement
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpForced = 5f;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask enemyLayer;
     [SerializeField] public float dashingVelocity, dashingTime, dashCooldown;
     [SerializeField] private float checkGround;
     [SerializeField] private PlayerAnimation playerAnimation;
+    [SerializeField] private float radius;
+    [SerializeField] private float xAttack;
+    [SerializeField] private float yAttack;
+    
 
 
 
@@ -21,9 +26,11 @@ public class PlayerMovement : AbsMovement
     private bool canDash = true;
     public int combo;
     public bool isAttackCombo = false;
+    private Coroutine resetComboCoroutine;
     private bool isGroundedCheck = true;
     private bool isMovingRight = true;
-
+    private float attackPosition;
+    
 
     public Rigidbody2D rigidbody2D;
     private TrailRenderer trailRenderer;
@@ -121,17 +128,48 @@ public class PlayerMovement : AbsMovement
             EndCombo();
         }
     }
+
     public void EndCombo()
     {
         isAttackCombo = false;
         combo = 0;  
     }
+
     public void Combo()
     {
-        Debug.Log(isAttackCombo);
-        if(!isAttackCombo && InputManager.Instance.IsAttackHold())
+        if(!isAttackCombo && InputManager.Instance.IsAttackPressed())
         {
             isAttackCombo = true;
+            if (resetComboCoroutine != null)
+            {
+                StopCoroutine(resetComboCoroutine);
+            }
+            resetComboCoroutine = StartCoroutine(ResetAttackCombo());
+
+
+            attackPosition = transform.position.x + xAttack;
+            if (!isMovingRight) attackPosition = transform.position.x - xAttack;
+            var x = new Vector3(attackPosition, transform.position.y + yAttack);
+            Collider2D[] hitEnemy = Physics2D.OverlapCircleAll(x,radius, enemyLayer);
+            foreach (Collider2D col in hitEnemy) { 
+                Debug.Log("hitted");
+            }
+            
         }
+    }
+    //public void OnDrawGizmos()
+    //{
+    //    attackPosition = transform.position.x + xAttack;
+    //    if (!isMovingRight) attackPosition = transform.position.x - xAttack;
+    //    var x = new Vector3(attackPosition, transform.position.y + yAttack);
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(x, radius);
+    //}
+
+    private IEnumerator ResetAttackCombo()
+    {
+        yield return new WaitForSeconds(1f);
+        isAttackCombo = false;
+        resetComboCoroutine = null;
     }
 }

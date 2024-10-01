@@ -55,7 +55,7 @@ public class PlayerAnimation : AbsAnimator
     }
     private void AttackAnimationHandler()
     {
-        if (!playerMovement.isAttackCombo && InputManager.Instance.IsAttackHold())
+        if (!playerMovement.isAttackCombo && InputManager.Instance.IsAttackPressed())
         {
             animator.SetTrigger(PlayerAnimationParameter.IsAttack.ToString());
             animator.SetFloat(PlayerAnimationParameter.AttackComboNumber.ToString(),playerMovement.combo);
