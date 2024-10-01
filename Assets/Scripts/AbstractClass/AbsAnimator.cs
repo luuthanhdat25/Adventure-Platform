@@ -22,6 +22,11 @@ namespace AbstractClass
             return;
         }
 
+        public virtual void SetTrigger(string parraName)
+        {
+            return;
+        }
+
         public virtual float GetAnimationDuration(string animationName, int layerIndex = 0)
         {
             return 0;

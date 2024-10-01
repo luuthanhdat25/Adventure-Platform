@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RepeatUtils
@@ -27,7 +26,7 @@ namespace RepeatUtils
             // For override
         }
 
-        public static T LoadComponent<T>(ref T component, GameObject gameObj) where T : Component
+        public T LoadComponent<T>(ref T component, GameObject gameObj) where T : Component
         {
             if (component != null) return component;
 
@@ -38,7 +37,7 @@ namespace RepeatUtils
             return null;
         }
 
-        public static T LoadComponentInChild<T>(ref T component, GameObject gameObjParent) where T : Component
+        public T LoadComponentInChild<T>(ref T component, GameObject gameObjParent) where T : Component
         {
             if (component != null) return component;
 
@@ -49,11 +48,11 @@ namespace RepeatUtils
             return null;
         }
 
-        public static T LoadComponentInParent<T>(ref T component, GameObject gameObj) where T : Component
+        public T LoadComponentInParent<T>(ref T component) where T : Component
         {
             if (component != null) return component;
 
-            Transform parent = gameObj.transform.parent;
+            Transform parent = this.gameObject.transform.parent;
             while (parent != null)
             {
                 T foundComponent = parent.GetComponent<T>();
@@ -65,7 +64,7 @@ namespace RepeatUtils
                 parent = parent.parent;
             }
 
-            Debug.LogError($"Component [{typeof(T).Name}] not found in parents of GameObject [{gameObj.name}]");
+            Debug.LogError($"Component [{typeof(T).Name}] not found in parents of GameObject [{this.gameObject.name}]");
             return null;
         }
     }
