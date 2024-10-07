@@ -1,7 +1,7 @@
 using AbstractClass;
 using UnityEngine;
 
-public class MonkeyGolemController : EnemyController
+public class GroundEnemyController : EnemyController
 {
 	[SerializeField]
 	private float attackRadius = 2f;
