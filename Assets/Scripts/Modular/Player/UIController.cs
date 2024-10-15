@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAnimation : MonoBehaviour
+public class UIController : MonoBehaviour
 {
 
-    
-    // Start is called before the first frame update
+    private GameObject upgradeUI;
     void Start()
     {
-        
+        upgradeUI = GameObject.Find("UpgradeUI");
+        upgradeUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -17,5 +17,4 @@ public class CharacterAnimation : MonoBehaviour
     {
         
     }
-
 }

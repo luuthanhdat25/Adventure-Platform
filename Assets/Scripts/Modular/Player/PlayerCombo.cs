@@ -64,7 +64,7 @@ public class PlayerCombo : RepeatMonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("Hitted");
+            // Debug.Log("Hitted");
             var enemyController = enemy.GetComponent<AbsController>();
             if (enemyController != null)
             {
