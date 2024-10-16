@@ -1,6 +1,7 @@
 using UnityEngine;
 using RepeatUtils.DesignPattern.SingletonPattern;
 using System;
+using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
 namespace Manager
@@ -11,6 +12,7 @@ namespace Manager
 
         private PlayerInputAction inputSystemSetting;
 
+        private Dictionary<string, bool> inputStates = new Dictionary<string, bool>();
         protected override void Awake()
         {
             base.Awake();
@@ -30,7 +32,7 @@ namespace Manager
 
         private void Start()
         {
-            inputSystemSetting.Player.SwitchGun.performed += (InputAction.CallbackContext context) => OnSwitchGun?.Invoke();
+            inputSystemSetting.Player.SwitchGun.performed += (InputAction.CallbackContext context) =>  OnSwitchGun?.Invoke();
             inputSystemSetting.UI.Escape.performed += (InputAction.CallbackContext context) => GameManager.Instance.TogglePauseGame();
         }
 
@@ -42,12 +44,44 @@ namespace Manager
         }
 
         public bool IsDashInputTrigger() =>inputSystemSetting.Player.Dash.IsPressed();
+
+       
+
+        public bool IsJumpInputTrigger() => IsInputTriggered("Jump", inputSystemSetting.Player.Jump.IsPressed());
         
-        public bool IsAttackPressed() => inputSystemSetting.Player.Attack.IsPressed();
+        public bool IsTabIsOpenedPressed() => IsInputTriggered("OpenTabMenu", inputSystemSetting.Player.OpenTabMenu.IsPressed());
+        
+        public bool IsAttackPressed() => 
+            // IsInputTriggered("Attack",
+                inputSystemSetting.Player.Attack.IsPressed()
+                // )
+                ;
 
         public bool IsAttackHold() => inputSystemSetting.Player.Attack.IsInProgress();
 
         public bool IsShootPressed() => inputSystemSetting.Player.Shoot.IsPressed();
+
+        public bool IsPerformSkillPressed()=> inputSystemSetting.Player.PerformSkill.IsPressed(); 
+        
+        private bool IsInputTriggered(string actionName, bool isPressed)
+        {
+            if (!inputStates.ContainsKey(actionName))
+            {
+                inputStates[actionName] = false;
+            }
+
+            bool wasPressed = inputStates[actionName];
+
+            if (isPressed && !wasPressed)
+            {
+                inputStates[actionName] = true;
+                return true;
+            }
+            inputStates[actionName] = isPressed;
+            return false;
+        }
+       
+        
 
         /// <summary>
         /// The current Pointer coordinates in window space

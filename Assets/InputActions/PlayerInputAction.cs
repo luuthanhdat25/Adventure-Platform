@@ -98,6 +98,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PerformSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""a02f2eba-2c12-4a41-b2a7-04780f6a2820"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenTabMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9aaf9a1-e6cc-4844-a579-b5f2f503c564"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -379,7 +397,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a041b07a-a234-4a79-968e-ef3d453a22e5"",
-                    ""path"": ""<Keyboard>/k"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -428,6 +446,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9aed0d1-cb0c-4cfa-9945-6785d3375f3d"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PerformSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5cc15a3-0650-49ae-8777-a4084d29fa7a"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenTabMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -535,6 +575,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_SwitchGun = m_Player.FindAction("SwitchGun", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_PerformSkill = m_Player.FindAction("PerformSkill", throwIfNotFound: true);
+        m_Player_OpenTabMenu = m_Player.FindAction("OpenTabMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
@@ -607,6 +649,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SwitchGun;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_PerformSkill;
+    private readonly InputAction m_Player_OpenTabMenu;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -619,6 +663,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @SwitchGun => m_Wrapper.m_Player_SwitchGun;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @PerformSkill => m_Wrapper.m_Player_PerformSkill;
+        public InputAction @OpenTabMenu => m_Wrapper.m_Player_OpenTabMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -652,6 +698,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @PerformSkill.started += instance.OnPerformSkill;
+            @PerformSkill.performed += instance.OnPerformSkill;
+            @PerformSkill.canceled += instance.OnPerformSkill;
+            @OpenTabMenu.started += instance.OnOpenTabMenu;
+            @OpenTabMenu.performed += instance.OnOpenTabMenu;
+            @OpenTabMenu.canceled += instance.OnOpenTabMenu;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -680,6 +732,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @PerformSkill.started -= instance.OnPerformSkill;
+            @PerformSkill.performed -= instance.OnPerformSkill;
+            @PerformSkill.canceled -= instance.OnPerformSkill;
+            @OpenTabMenu.started -= instance.OnOpenTabMenu;
+            @OpenTabMenu.performed -= instance.OnOpenTabMenu;
+            @OpenTabMenu.canceled -= instance.OnOpenTabMenu;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -798,6 +856,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnSwitchGun(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnPerformSkill(InputAction.CallbackContext context);
+        void OnOpenTabMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

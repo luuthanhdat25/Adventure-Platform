@@ -168,7 +168,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 192
-  dashingVelocity: 6
+  dashingVelocity: 10
   dashingTime: 0.2
   dashCooldown: 1
   checkGround: -0.81
@@ -189,8 +189,10 @@ GameObject:
   - component: {fileID: 9192857201584618866}
   - component: {fileID: 2981254110486958587}
   - component: {fileID: 4100229000026824227}
-  - component: {fileID: 5838404306923752013}
   - component: {fileID: 7177969705623208823}
+  - component: {fileID: 6553416882715513904}
+  - component: {fileID: 5838404306923752013}
+  - component: {fileID: 888019037241849178}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -208,7 +210,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.59, y: -2.13, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.25, y: 2.25, z: 2.25}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6237375271008861245}
@@ -402,6 +404,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2129918487987263398}
+--- !u!114 &7177969705623208823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000012084707070049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c72d28fb39874947904e293bfdf54b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 5838404306923752013}
+  attackPoint: {fileID: 4721474529373641663}
+  attackRadius: 1.13
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &6553416882715513904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000012084707070049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5244efa00814541b0825e72210946d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
 --- !u!114 &5838404306923752013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,7 +461,11 @@ MonoBehaviour:
     m_Bits: 64
   checkGroundYOffSet: -0.8
   groundCheckRadius: 0.3
---- !u!114 &7177969705623208823
+  skillTreeUI: {fileID: 6553416882715513904}
+  playerSO: {fileID: 11400000, guid: 509d2b43d589c784a8145228e3ec4531, type: 2}
+  skillSO1: {fileID: 11400000, guid: f5daaf3a81112584b9ef1f72e09fc4c4, type: 2}
+  skillSO2: {fileID: 11400000, guid: 121c1a7465c33c844adc057cc955ac61, type: 2}
+--- !u!114 &888019037241849178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -437,15 +474,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4000012084707070049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c72d28fb39874947904e293bfdf54b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 62afc7574c4c41b49aca4817a9add072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 5838404306923752013}
-  attackPoint: {fileID: 4721474529373641663}
-  attackRadius: 1.13
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!1 &9181595445082924973
 GameObject:
   m_ObjectHideFlags: 0

@@ -76,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PerformSkill",
+                    "type": "Button",
+                    "id": "a02f2eba-2c12-4a41-b2a7-04780f6a2820",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenTabMenu",
+                    "type": "Button",
+                    "id": "d9aaf9a1-e6cc-4844-a579-b5f2f503c564",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -357,7 +375,7 @@
                 {
                     "name": "",
                     "id": "a041b07a-a234-4a79-968e-ef3d453a22e5",
-                    "path": "<Keyboard>/k",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -406,6 +424,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9aed0d1-cb0c-4cfa-9945-6785d3375f3d",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PerformSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5cc15a3-0650-49ae-8777-a4084d29fa7a",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenTabMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
