@@ -30,4 +30,9 @@ public class PlayerAnimation : AbsAnimator
     {
         animator.SetFloat(paraName, value);
     }
+
+    public override void CrossFade(string toString, float d)
+    {
+        animator.CrossFade(toString,d);
+    }
 }

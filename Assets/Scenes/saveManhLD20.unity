@@ -800,6 +800,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7177969705623208823, guid: ad6559e88994f1e48bbe3f3032c48fd5, type: 3}
+      propertyPath: playerSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 509d2b43d589c784a8145228e3ec4531, type: 2}
+    - target: {fileID: 7177969705623208823, guid: ad6559e88994f1e48bbe3f3032c48fd5, type: 3}
+      propertyPath: skillSO1
+      value: 
+      objectReference: {fileID: 11400000, guid: 121c1a7465c33c844adc057cc955ac61, type: 2}
+    - target: {fileID: 7177969705623208823, guid: ad6559e88994f1e48bbe3f3032c48fd5, type: 3}
+      propertyPath: skillSO2
+      value: 
+      objectReference: {fileID: 11400000, guid: f5daaf3a81112584b9ef1f72e09fc4c4, type: 2}
+    - target: {fileID: 7177969705623208823, guid: ad6559e88994f1e48bbe3f3032c48fd5, type: 3}
+      propertyPath: isAttackCombo
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

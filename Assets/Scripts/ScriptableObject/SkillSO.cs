@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 namespace ScriptableObjects
 {
+    [Serializable]
     [CreateAssetMenu(fileName = "New SkillSO", menuName = "ScriptableObjects/SkillSO")]
     public class SkillSO : ScriptableObject
     {
@@ -16,3 +18,4 @@ namespace ScriptableObjects
     }
 }
 
+    

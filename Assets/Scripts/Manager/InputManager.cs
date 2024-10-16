@@ -51,7 +51,11 @@ namespace Manager
         
         public bool IsTabIsOpenedPressed() => IsInputTriggered("OpenTabMenu", inputSystemSetting.Player.OpenTabMenu.IsPressed());
         
-        public bool IsAttackPressed() => IsInputTriggered("Attack",inputSystemSetting.Player.Attack.IsPressed());
+        public bool IsAttackPressed() => 
+            // IsInputTriggered("Attack",
+                inputSystemSetting.Player.Attack.IsPressed()
+                // )
+                ;
 
         public bool IsAttackHold() => inputSystemSetting.Player.Attack.IsInProgress();
 

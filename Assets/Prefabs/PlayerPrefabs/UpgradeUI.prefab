@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 200585407746758849}
   - component: {fileID: 4451725747235170893}
   m_Layer: 5
-  m_Name: Button
+  m_Name: FireSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 3023338798067371211}
   - component: {fileID: 1400118811801143433}
   m_Layer: 5
-  m_Name: Button
+  m_Name: WaterSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 2916803564899793554}
   - component: {fileID: 7068610060168678053}
   m_Layer: 5
-  m_Name: Image
+  m_Name: WaterAnimation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,7 +644,7 @@ GameObject:
   - component: {fileID: 2024792839282592034}
   - component: {fileID: 4379614027440607952}
   m_Layer: 5
-  m_Name: Image
+  m_Name: FireAnimation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

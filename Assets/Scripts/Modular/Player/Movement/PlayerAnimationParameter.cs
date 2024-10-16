@@ -8,4 +8,5 @@ public enum PlayerAnimationParameter
     IsAttack,
     AttackFire,
     AttackWater,
+    IsAttacking 
 }

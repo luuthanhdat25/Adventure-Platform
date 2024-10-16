@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PlayerController : AbsController
 {
-    [SerializeField] 
+    [SerializeField]
     private float speed = 5f;
 
     [SerializeField]
@@ -15,26 +15,17 @@ public class PlayerController : AbsController
 
     [SerializeField]
     private LayerMask groundLayer;
-    
+
     [SerializeField]
     private float checkGroundYOffSet;
 
     [SerializeField]
     private float groundCheckRadius = 0.2f;
 
-    [SerializeField] private SkillTreeUI skillTreeUI;
-
-    [SerializeField]
-    private playerSO playerSO;
-    [SerializeField]
-    private SkillSO skillSO1;
-    [SerializeField]
-    private SkillSO skillSO2;
-
-
+    [SerializeField] 
+    private SkillTreeUI skillTreeUI;
 
     private PlayerMovement playerMovement;
-    
     private bool isMovingRight = true;
     private bool isOpenTabUpgrade = false;
     private int jumpCount = 0;
@@ -46,70 +37,103 @@ public class PlayerController : AbsController
 
     private void FixedUpdate()
     {
-        absAnimator.SetBool(PlayerAnimationParameter.IsDash.ToString(), playerMovement.IsDashing);
-
-        absAnimator.SetFloat(PlayerAnimationParameter.JumpVectorVertical.ToString(), playerMovement.GetVelocity().y);
-
+        UpdateAnimatorParameters();
 
         if (playerMovement.IsDashing) return;
-        var inputVector = InputManager.Instance.GetRawInputNormalized();
+
+        Vector2 inputVector = InputManager.Instance.GetRawInputNormalized();
+
+        if (CanMove())
+            playerMovement.Move(inputVector, speed);
+
+        if (CanFlip(inputVector.x))
+            FlipCharacter();
+
+        if (InputManager.Instance.IsDashInputTrigger() && CanDash())
+            playerMovement.Dash();
+
+        if (InputManager.Instance.IsAttackPressed() && CanAttack())
+            playerCombo.HandleCombo();
+
+        if (IsGround())
+            HandleGroundState(inputVector.x);
+
+        if (InputManager.Instance.IsJumpInputTrigger() && CanJump())
+            PerformJump(inputVector.y);
+
+        if (InputManager.Instance.IsPerformSkillPressed() && CanPerformSkill())
+            playerCombo.SkillHandle();
+
+        if (InputManager.Instance.IsTabIsOpenedPressed())
+            ToggleTabUpgrade();
+    }
+
+    private void UpdateAnimatorParameters()
+    {
+        absAnimator.SetBool(PlayerAnimationParameter.IsDash.ToString(), playerMovement.IsDashing);
+        absAnimator.SetFloat(PlayerAnimationParameter.JumpVectorVertical.ToString(), playerMovement.GetVelocity().y);
+        absAnimator.SetBool(PlayerAnimationParameter.IsJump.ToString(), !IsGround());
+    }
+
+    private bool CanMove()
+    {
+        return !isOpenTabUpgrade && !playerCombo.isAttaking && !playerCombo.isPerformingSkill;
+    }
+
+    private bool CanFlip(float inputX)
+    {
+        return (inputX > 0 && !isMovingRight || inputX < 0 && isMovingRight) && CanMove();
+    }
+
+    private bool CanDash()
+    {
+        return !isOpenTabUpgrade;
+    }
+
+    private bool CanAttack()
+    {
+        return !isOpenTabUpgrade && IsGround() && !playerCombo.isPerformingSkill;
+    }
+
+    private bool CanJump()
+    {
+        return jumpCount < 2 && !playerCombo.isAttaking && !playerCombo.isPerformingSkill;
+    }
+
+    private bool CanPerformSkill()
+    {
+        return !isOpenTabUpgrade && IsGround() && !playerCombo.isAttaking;
+    }
+
+    private void FlipCharacter()
+    {
+        isMovingRight = !isMovingRight;
+        absMovement.Flip();
+    }
+
+    private void PerformJump(float inputY)
+    {
+        jumpCount++;
+        playerMovement.JumpHandler(inputY);
+    }
+
+    private void HandleGroundState(float inputX)
+    {
+        jumpCount = 0;
+        absAnimator.SetFloat(PlayerAnimationParameter.PlayerSpeed.ToString(), Math.Abs(inputX));
+    }
+
+    private void ToggleTabUpgrade()
+    {
         if (!isOpenTabUpgrade)
         {
-            playerMovement.Move(inputVector, speed);
+            skillTreeUI.OpenTabUpgrade();
         }
-        if (inputVector.x > 0 && !isMovingRight || inputVector.x < 0 && isMovingRight)
+        else
         {
-            
-            isMovingRight = !isMovingRight;
-            absMovement.Flip();
+            skillTreeUI.CloseTabUpgrade();
         }
-
-        if (InputManager.Instance.IsDashInputTrigger() && !isOpenTabUpgrade )
-        {
-            playerMovement.Dash();
-        }
-
-        if (InputManager.Instance.IsAttackPressed() && !isOpenTabUpgrade && IsGround())
-        {
-            playerCombo.HandleCombo();
-        }
-        Debug.Log($"jump count: {jumpCount}");
-        if (IsGround())
-        {
-            jumpCount = 0;
-            absAnimator.SetFloat(PlayerAnimationParameter.PlayerSpeed.ToString(), Math.Abs(inputVector.x));
-        }
-        if (InputManager.Instance.IsJumpInputTrigger() && jumpCount < 2)
-        {
-            jumpCount++;
-            playerMovement.JumpHandler(inputVector.y);
-        }
-        if (InputManager.Instance.IsPerformSkillPressed() && !isOpenTabUpgrade && IsGround())
-        {
-            if(playerSO.currentSelectedSkill == skillSO1)
-            {
-                absAnimator.SetTrigger(PlayerAnimationParameter.AttackFire.ToString());
-            } else
-            {
-                absAnimator.SetTrigger(PlayerAnimationParameter.AttackWater.ToString());
-            }
-        }
-        if (InputManager.Instance.IsTabIsOpenedPressed())
-        {
-            if (!isOpenTabUpgrade)
-            {
-                skillTreeUI.OpenTabUpgrade();
-                isOpenTabUpgrade = true;
-            }
-            else
-            {
-                skillTreeUI.CloseTabUpgrade();
-                isOpenTabUpgrade= false;
-            }
-        }
-
-
-        absAnimator.SetBool(PlayerAnimationParameter.IsJump.ToString(), !IsGround());
+        isOpenTabUpgrade = !isOpenTabUpgrade;
     }
 
     public bool IsGround()
@@ -125,4 +149,3 @@ public class PlayerController : AbsController
     //    Gizmos.DrawWireSphere(groundCheckPos, groundCheckRadius);
     //}
 }
-
