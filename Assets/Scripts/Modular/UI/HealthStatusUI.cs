@@ -13,7 +13,7 @@ namespace UI
         {
             //PlayerPublicInfor.Instance.Controller.AbsHealth.OnHealthChanged += OnHealthChanged;
         }
-
+        
         private void OnHealthChanged(object sender, AbsHealth.OnHealthChangedEventArgs e)
         {
             healthText.text = e.HealthUpdated.ToString();
