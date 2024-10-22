@@ -13,9 +13,9 @@ namespace AbstractClass
 
         public class OnHealthChangedEventArgs : EventArgs
         {
-            public int HealthUpdated;
+            public float HealthPersent;
         }
-
+        
         protected int hpMax;
         protected bool isDead = false;
         protected int hpCurrent;
@@ -23,6 +23,7 @@ namespace AbstractClass
 
         private void OnEnable() => Reborn();
 
+        
         public virtual void Reborn()
         {
             this.hpCurrent = this.hpMax;
@@ -32,7 +33,8 @@ namespace AbstractClass
 
         public void CallOnHealthChangedEvent(int healthUpdated)
         {
-            OnHealthChanged?.Invoke(this, new OnHealthChangedEventArgs { HealthUpdated = healthUpdated });
+            Debug.Log(healthUpdated);
+            OnHealthChanged?.Invoke(this, new OnHealthChangedEventArgs { HealthPersent = (float)healthUpdated/hpMax });
         }
 
         public override void Add(int hpAdd)
@@ -46,8 +48,10 @@ namespace AbstractClass
 
         public override void Deduct(int hpDeduct)
         {
-            if (IsDead()) return;
 
+            if (IsDead()) return;
+            
+            Debug.Log("Deuct: " + hpDeduct);
             this.hpCurrent -= hpDeduct;
             CallOnHealthChangedEvent(hpCurrent);
             this.CheckIsDead();

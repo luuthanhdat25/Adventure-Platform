@@ -6,4 +6,7 @@ public enum PlayerAnimationParameter
     IsJump,
     AttackComboNumber,
     IsAttack,
+    AttackFire,
+    AttackWater,
+    IsAttacking 
 }

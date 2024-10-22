@@ -32,10 +32,10 @@ public class GroundEnemyController : EnemyController
 		Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(GetAttackPointPosition(), attackRadius, playerLayerMark);
 		foreach (Collider2D enemy in hitEnemies)
 		{
-			Debug.Log("We hit " + enemy.name);
 			var beAttackController = enemy.GetComponent<AbsController>();
 			if (beAttackController != null)
 			{
+				Debug.Log("We hit " + enemy.name);
 				AbsDamageSender.CollisionWithController(beAttackController);
 			}
 		}

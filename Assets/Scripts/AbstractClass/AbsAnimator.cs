@@ -36,5 +36,10 @@ namespace AbstractClass
         {
             return 0;
         }
+
+        public virtual void CrossFade(string toString, float d)
+        {
+            return;   
+        }
     }
 }

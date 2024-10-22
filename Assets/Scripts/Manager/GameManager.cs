@@ -91,7 +91,7 @@ namespace Manager
             SoundSO playSound = isWin ? winGameSoundSO : loseGameSoundSO;
             //SoundPooling.Instance.CreateSound(playSound, PlayerPublicInfor.Instance.Position, 0, 0);
 
-            UIManager.Instance.GameOverUI.Show(isWin);
+            UI.UIManager.Instance.GameOverUI.Show(isWin);
             ChangeState(GameState.GameOver);
             Time.timeScale = 0;
         }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6562610416698500820}
   - component: {fileID: 6518245768980441577}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3704186673842788163}
   - component: {fileID: 3263526177725840182}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VisionSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4721474529373641663}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6237375271008861245}
   - component: {fileID: 3337507657653777779}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 192
-  dashingVelocity: 6
+  dashingVelocity: 10
   dashingTime: 0.2
   dashCooldown: 1
   checkGround: -0.81
@@ -189,9 +189,11 @@ GameObject:
   - component: {fileID: 9192857201584618866}
   - component: {fileID: 2981254110486958587}
   - component: {fileID: 4100229000026824227}
-  - component: {fileID: 5838404306923752013}
   - component: {fileID: 7177969705623208823}
-  m_Layer: 0
+  - component: {fileID: 6553416882715513904}
+  - component: {fileID: 5838404306923752013}
+  - component: {fileID: 3230283211748497996}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +210,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.59, y: -2.13, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.25, y: 2.25, z: 2.25}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6237375271008861245}
@@ -402,32 +404,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2129918487987263398}
---- !u!114 &5838404306923752013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4000012084707070049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5b93f84c7b941439162286cd3d3469, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  absGraphic: {fileID: 6518245768980441577}
-  absAnimator: {fileID: 4100229000026824227}
-  absMovement: {fileID: 3337507657653777779}
-  absVisionSensor: {fileID: 3263526177725840182}
-  absHealth: {fileID: 5865556026203197422}
-  absDamageReciver: {fileID: 9192857201584618866}
-  absDamageSender: {fileID: 2981254110486958587}
-  speed: 5
-  playerCombo: {fileID: 7177969705623208823}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  checkGroundYOffSet: -0.8
-  groundCheckRadius: 0.3
 --- !u!114 &7177969705623208823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,6 +422,68 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  playerSO: {fileID: 11400000, guid: 509d2b43d589c784a8145228e3ec4531, type: 2}
+  skillSO1: {fileID: 11400000, guid: 121c1a7465c33c844adc057cc955ac61, type: 2}
+  skillSO2: {fileID: 11400000, guid: f5daaf3a81112584b9ef1f72e09fc4c4, type: 2}
+  isAttackCombo: 0
+  isPerformingSkill: 0
+  isAttaking: 0
+--- !u!114 &6553416882715513904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000012084707070049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5244efa00814541b0825e72210946d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+--- !u!114 &5838404306923752013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000012084707070049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5b93f84c7b941439162286cd3d3469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  absGraphic: {fileID: 6518245768980441577}
+  absAnimator: {fileID: 4100229000026824227}
+  absMovement: {fileID: 3337507657653777779}
+  absVisionSensor: {fileID: 3263526177725840182}
+  absHealth: {fileID: 0}
+  absDamageReciver: {fileID: 9192857201584618866}
+  absDamageSender: {fileID: 2981254110486958587}
+  speed: 5
+  playerCombo: {fileID: 7177969705623208823}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  checkGroundYOffSet: -0.8
+  groundCheckRadius: 0.3
+  skillTreeUI: {fileID: 6553416882715513904}
+--- !u!114 &3230283211748497996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000012084707070049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440a64c4356eba47aeff8ed8074dae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStat: {fileID: 11400000, guid: 509d2b43d589c784a8145228e3ec4531, type: 2}
+  _characterHealth: {fileID: 2116020610596634733}
+  currentHealth: 0
+  maxHealth: 0
 --- !u!1 &9181595445082924973
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,8 +493,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2715189465727217348}
-  - component: {fileID: 5865556026203197422}
-  m_Layer: 0
+  - component: {fileID: 2116020610596634733}
+  m_Layer: 3
   m_Name: Stat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +516,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7015312382823505023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5865556026203197422
+--- !u!114 &2116020610596634733
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -487,6 +525,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 9181595445082924973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c17928f82934a14bbba90a06056a106, type: 3}
+  m_Script: {fileID: 11500000, guid: e496381342d9a244da7db6f068c17545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
