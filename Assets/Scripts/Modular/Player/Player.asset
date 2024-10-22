@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8fbee5bb8cc4eb4897c60ca020f904a, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  Health: 100
+  Health: 10
   MoveSpeed: 0
   skillUnlocked: []
   currentSelectedSkill: {fileID: 0}

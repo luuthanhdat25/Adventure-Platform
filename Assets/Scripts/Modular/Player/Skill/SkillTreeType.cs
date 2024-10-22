@@ -8,7 +8,3 @@ public enum SkillAbilityEnum
     AttackWater,
     Dash
 }
-public enum SkillStateEnum
-{
-
-}

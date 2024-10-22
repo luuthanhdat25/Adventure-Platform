@@ -1,3 +1,4 @@
+using System;
 using AbstractClass;
 using RepeatUtils;
 using System.Collections;
@@ -14,10 +15,8 @@ public class PlayerCombo : RepeatMonoBehaviour
     [SerializeField] private float attackRadius;
 
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private playerSO playerSO;
-    [SerializeField] private SkillSO skillSO1;
-    [SerializeField] private SkillSO skillSO2;
-
+    [SerializeField] private CharacterHealth characterHealth;
+                    
     public bool isAttackCombo;
     private int combo;
     private AbsAnimator animator;
@@ -25,6 +24,13 @@ public class PlayerCombo : RepeatMonoBehaviour
     private bool canPerformingSkill = true;
     private Coroutine resetComboCoroutine;
     public bool isAttaking;
+    private SkillController skillController;
+
+    public void Start()
+    {
+        skillController = new SkillController();
+        characterHealth.OnDead += DeadHandler;
+    }
 
     protected override void LoadComponents()
     {
@@ -49,8 +55,6 @@ public class PlayerCombo : RepeatMonoBehaviour
             isAttaking = false;
             PerformAttack();
         }
-
-        
     }
 
     public void StartCombo()
@@ -76,7 +80,10 @@ public class PlayerCombo : RepeatMonoBehaviour
         if (!canPerformingSkill) return;
         StartCoroutine(PerformSkill());
     }
-
+    private SkillDTO GetSelectedSkill()
+    {
+        return skillController.GetCurrentSKill().Result;
+    }
     private IEnumerator PerformSkill()
     {
         Vector3 attackPos = new Vector3(attackPoint.position.x, attackPoint.position.y);
@@ -86,25 +93,25 @@ public class PlayerCombo : RepeatMonoBehaviour
 
         if (!isPerformingSkill)
         {
-            SkillSO selectedSkill = GetSelectedSkill(); 
+            SkillDTO selectedSkill = GetSelectedSkill();
+            Debug.Log(selectedSkill.skillName);
             animator.SetTrigger(GetSkillAnimationTrigger(selectedSkill));
             foreach (var item in hitEnemies)
             {
                 Debug.Log("Skill hitted");
             }
+
             yield return new WaitForSeconds(selectedSkill.cooldown);
 
             EndSkillAction();
         }
     }
-    private SkillSO GetSelectedSkill()
-    {
-        return playerSO.currentSelectedSkill == skillSO1 ? skillSO1 : skillSO2;
-    }
 
-    private string GetSkillAnimationTrigger(SkillSO skill)
+    private string GetSkillAnimationTrigger(SkillDTO skill)
     {
-        return skill == skillSO1 ? PlayerAnimationParameter.AttackFire.ToString() : PlayerAnimationParameter.AttackWater.ToString();
+        return skill.skillName == SkillAbilityEnum.AttackFire
+            ? PlayerAnimationParameter.AttackFire.ToString()
+            : PlayerAnimationParameter.AttackWater.ToString();
     }
 
     private void EndSkillAction()
@@ -134,6 +141,7 @@ public class PlayerCombo : RepeatMonoBehaviour
     {
         isAttaking = true;
     }
+
     public void OnDrawGizmos()
     {
         var x = new Vector3(attackPoint.position.x, attackPoint.position.y);
@@ -147,5 +155,11 @@ public class PlayerCombo : RepeatMonoBehaviour
         isAttackCombo = false;
         resetComboCoroutine = null;
         isAttaking = false;
+    }
+
+
+    private void DeadHandler()
+    {
+        Debug.Log("Dead");
     }
 }

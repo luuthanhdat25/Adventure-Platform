@@ -15,6 +15,15 @@ namespace ScriptableObjects
         public float activeTime;
 
         public virtual void Active() { return; }
+        public static SkillDTO FromSkillSO(SkillSO skillSO)
+        {
+            return new SkillDTO
+            {
+                skillName = skillSO.skillName,
+                cooldown = skillSO.cooldown,
+                activeTime = skillSO.activeTime
+            };
+        }
     }
 }
 
