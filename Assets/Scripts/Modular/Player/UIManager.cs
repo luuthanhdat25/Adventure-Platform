@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]    
-    private UpgradeUI upgradeUI;
+    [SerializeField] private UpgradeUI upgradeUI;
 
     [SerializeField] private PlayerStatsUI playerStatsUI;
 
-    // public void FixedUpdate()
-    // {
-    //     playerStatsUI.UpdateHealthBar(PlayerSingleton.Instance.GetHealthPersen());
-    // }
+    private void Start()
+    {
+        upgradeUI.gameObject.SetActive(false);
+    }
+
+
 }
