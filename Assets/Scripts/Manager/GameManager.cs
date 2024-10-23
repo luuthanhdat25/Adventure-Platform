@@ -45,7 +45,7 @@ namespace Manager
 
         private void Start()
         {
-            //SoundPooling.Instance.CreateSound(gameMusicBackgroundSO, PlayerPublicInfor.Instance.Position, 0, 0); 
+            SoundPooling.Instance.CreateSound(gameMusicBackgroundSO, 0, 0); 
         }
 
         public void TogglePauseGame()
@@ -61,10 +61,16 @@ namespace Manager
                 Time.timeScale = 1;
                 OnGameUnpaused?.Invoke();
             }
+
         }
 
         private void FixedUpdate()
         {
+
+            if (InputManager.Instance.IsEscapes())
+            {
+                TogglePauseGame();
+            }
             switch (state)
             {
                 case GameState.GamePlaying:

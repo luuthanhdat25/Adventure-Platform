@@ -187,9 +187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48668ec2086975b4986190828b04def1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winGameSoundSO: {fileID: 0}
-  loseGameSoundSO: {fileID: 0}
-  gameMusicBackgroundSO: {fileID: 0}
+  winGameSoundSO: {fileID: 11400000, guid: 1e569a826da898743b37ef927dbc7171, type: 2}
+  loseGameSoundSO: {fileID: 11400000, guid: 2fcbd3b45b862df46ac0221fa6a34b26, type: 2}
+  gameMusicBackgroundSO: {fileID: 11400000, guid: f5d26b05eac5abf42bfda7748281e37c, type: 2}
 --- !u!4 &87281535
 Transform:
   m_ObjectHideFlags: 0
@@ -1451,7 +1451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1056278912
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1662,7 +1662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1446713112
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2811,6 +2811,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932718220}
   m_CullTransparentMesh: 1
+--- !u!1 &1932827559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1932827561}
+  - component: {fileID: 1932827560}
+  m_Layer: 0
+  m_Name: SoundPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1932827560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932827559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08d4a780077f524ebf281dc7a176f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEmitterPrefab: {fileID: 8630556276526878920, guid: 12904888c379b764c81a42c575cbf3f8, type: 3}
+  maxPoolSize: 100
+--- !u!4 &1932827561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932827559}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.47685665, y: 0.6322223, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2139032274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4311,3 +4357,4 @@ SceneRoots:
   - {fileID: 466933394}
   - {fileID: 6682380227945709291}
   - {fileID: 2139032274}
+  - {fileID: 1932827561}

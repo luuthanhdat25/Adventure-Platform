@@ -27,7 +27,7 @@ namespace UI
 
         public void ShowUI(bool isShow)
         {
-            playerStatusUI.gameObject.SetActive(isShow);
+            //playerStatusUI.gameObject.SetActive(isShow);
         }
     }
 }
