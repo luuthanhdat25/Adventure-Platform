@@ -34,7 +34,7 @@ namespace UI
 
         private void BackToMenuScene()
         {
-            Loader.Load(Loader.Scene.GameMenuScene);
+            //Loader.Load(Loader.Scene.GameMenuScene);
         }
     }
 }

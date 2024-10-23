@@ -6,24 +6,28 @@ namespace UI
     public class InPlayingUI : RepeatMonoBehaviour
     {
         [SerializeField]
-        private GunStatusUI playerGunStatusUI;
-        public GunStatusUI PlayerGunStatusUI => playerGunStatusUI;
+        private PlayerStatsUI playerStatusUI;
+        public PlayerStatsUI PlayerStatusUI => playerStatusUI;
 
         [SerializeField]
-        private HealthStatusUI playerHealthStatusUI;
-        private HealthStatusUI PlayerHealthStatusUI => playerHealthStatusUI;
+        private UpgradeUI upgradeUI;
+        private UpgradeUI UpgradeUI => upgradeUI;
 
         protected override void LoadComponents()
         {
             base.LoadComponents();
-            LoadComponentInChild(ref playerGunStatusUI, gameObject);
-            LoadComponentInChild(ref playerHealthStatusUI, gameObject);
+            LoadComponentInChild(ref upgradeUI, gameObject);
+            LoadComponentInChild(ref upgradeUI, gameObject);
+        }
+
+        private void Start()
+        {
+            upgradeUI.gameObject.SetActive(false);
         }
 
         public void ShowUI(bool isShow)
         {
-            playerGunStatusUI.gameObject.SetActive(isShow);
-            playerHealthStatusUI.gameObject.SetActive(isShow);
+            playerStatusUI.gameObject.SetActive(isShow);
         }
     }
 }
