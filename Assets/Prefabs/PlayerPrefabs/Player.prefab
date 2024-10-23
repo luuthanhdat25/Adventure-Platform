@@ -481,9 +481,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStat: {fileID: 11400000, guid: 509d2b43d589c784a8145228e3ec4531, type: 2}
-  _characterHealth: {fileID: 2116020610596634733}
-  currentHealth: 0
-  maxHealth: 0
 --- !u!1 &9181595445082924973
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +490,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2715189465727217348}
-  - component: {fileID: 2116020610596634733}
   m_Layer: 3
   m_Name: Stat
   m_TagString: Untagged
@@ -516,15 +512,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7015312382823505023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2116020610596634733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9181595445082924973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e496381342d9a244da7db6f068c17545, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
