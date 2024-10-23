@@ -10,6 +10,8 @@ namespace Manager
     {
         public Action OnSwitchGun;
 
+        
+
         private PlayerInputAction inputSystemSetting;
 
         private Dictionary<string, bool> inputStates = new Dictionary<string, bool>();
@@ -50,7 +52,7 @@ namespace Manager
         public bool IsJumpInputTrigger() => IsInputTriggered("Jump", inputSystemSetting.Player.Jump.IsPressed());
         
         public bool IsTabIsOpenedPressed() => IsInputTriggered("OpenTabMenu", inputSystemSetting.Player.OpenTabMenu.IsPressed());
-        
+        public bool IsEscapes() => IsInputTriggered("Openpause", inputSystemSetting.Player.PauseGame.IsPressed());
         public bool IsAttackPressed() => 
             // IsInputTriggered("Attack",
                 inputSystemSetting.Player.Attack.IsPressed()
