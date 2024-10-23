@@ -1,8 +1,5 @@
 using Manager;
-using RepeatUtils;
 using RepeatUtils.DesignPattern.SingletonPattern;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace UI
