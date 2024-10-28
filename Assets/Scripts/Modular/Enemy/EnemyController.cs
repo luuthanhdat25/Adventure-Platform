@@ -1,4 +1,5 @@
 using AbstractClass;
+using System;
 using UnityEngine;
 
 public abstract class EnemyController : AbsController, IMovable, IAttack
@@ -14,10 +15,26 @@ public abstract class EnemyController : AbsController, IMovable, IAttack
 
     protected bool isMovingRight = true;
     protected float moveSpeed;
+    protected EnemyHeath enemyHeath;
 
-	private void Start()
+    protected override void Awake()
+    {
+        base.Awake();
+        enemyHeath = absHealth as EnemyHeath;
+    }
+
+    private void Start()
     {
         moveSpeed = baseMoveSpeed;
+        enemyHeath.OnDead += EnemyHealth_OnDead;
+    }
+
+    private void EnemyHealth_OnDead()
+    {
+        absAnimator.SetTrigger(EnemyAnimatorParameterEnum.Die.ToString());
+        // Turn on Static Rigid
+        // Turn off Collider
+        // Destroy when end animtion
     }
 
     public abstract float GetAttackRange();

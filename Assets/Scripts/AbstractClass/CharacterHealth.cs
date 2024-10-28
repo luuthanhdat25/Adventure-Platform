@@ -22,7 +22,6 @@ namespace AbstractClass
         protected int damage;
 
         private void OnEnable() => Reborn();
-
         
         public virtual void Reborn()
         {
@@ -75,5 +74,4 @@ namespace AbstractClass
 
         public override void SetDamage(int value) => damage = value;
     }
-
 }
