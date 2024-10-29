@@ -23,6 +23,8 @@ namespace Manager
         [SerializeField]
         private SoundSO gameMusicBackgroundSO;
 
+        [SerializeField] private SoundSO demosound;
+
         public class OnStateChangedEventArgs : EventArgs {
             public GameState NewGameState;
         }

@@ -9,5 +9,6 @@ public class playerSO : ScriptableObject
 {
     public int Health;
     public float MoveSpeed;
+    public int Stamina;
 
 }

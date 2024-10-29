@@ -19,7 +19,6 @@ public class SkillRepository : Repository<SkillData>
             SkillData.skillList = new List<SkillDTO>();
             Save(SkillData);
         } 
-
     }
 
     public async Task SaveCurrentSkill(SkillDTO currentKill)

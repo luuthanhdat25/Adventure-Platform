@@ -7,6 +7,8 @@ namespace UI
 {
     public class PauseUI : MonoBehaviour
     {
+
+        
         [SerializeField]
         private RectTransform pauseMenu;
         public RectTransform PauseMenu => pauseMenu;

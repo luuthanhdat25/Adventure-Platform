@@ -58,7 +58,7 @@ namespace Manager
                 inputSystemSetting.Player.Attack.IsPressed()
                 // )
                 ;
-
+        public bool IsNewAction() => IsInputTriggered("newaction", inputSystemSetting.Player.Newaction.IsPressed());
         public bool IsAttackHold() => inputSystemSetting.Player.Attack.IsInProgress();
 
         public bool IsShootPressed() => inputSystemSetting.Player.Shoot.IsPressed();

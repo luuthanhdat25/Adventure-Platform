@@ -9,32 +9,35 @@ using UnityEngine;
 public class PlayerCombo : RepeatMonoBehaviour
 {
     [SerializeField] private PlayerController playerController;
-
     [SerializeField] private Transform attackPoint;
-
     [SerializeField] private float attackRadius;
-
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private CharacterHealth characterHealth;
-                    
+    [SerializeField] private PlayerHealth characterHealth;
+    [SerializeField] private SkillController skillController;
+
+
+
     public bool isAttackCombo;
     private int combo;
     private AbsAnimator animator;
     public bool isPerformingSkill;
     private bool canPerformingSkill = true;
     private Coroutine resetComboCoroutine;
+    private SpriteRenderer spriteRenderer;
     public bool isAttaking;
-    private SkillController skillController;
+    private BoxCollider2D boxCollider;
+
 
     public void Start()
     {
-        skillController = new SkillController();
         characterHealth.OnDead += DeadHandler;
     }
 
     protected override void LoadComponents()
     {
         LoadComponent(ref playerController, gameObject);
+        LoadComponent(ref spriteRenderer, gameObject);
+        LoadComponent(ref boxCollider,gameObject);
         animator = playerController.AbsAnimator;
     }
 
@@ -59,6 +62,7 @@ public class PlayerCombo : RepeatMonoBehaviour
 
     public void StartCombo()
     {
+        PlayerSingleton.Instance.DeductStamina(10);
         isAttackCombo = false;
         combo++;
         if (combo == 3)
@@ -86,6 +90,7 @@ public class PlayerCombo : RepeatMonoBehaviour
     }
     private IEnumerator PerformSkill()
     {
+        PlayerSingleton.Instance.DeductStamina(20);
         Vector3 attackPos = new Vector3(attackPoint.position.x, attackPoint.position.y);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPos, attackRadius, enemyLayer);
 
@@ -94,16 +99,20 @@ public class PlayerCombo : RepeatMonoBehaviour
         if (!isPerformingSkill)
         {
             SkillDTO selectedSkill = GetSelectedSkill();
-            Debug.Log(selectedSkill.skillName);
-            animator.SetTrigger(GetSkillAnimationTrigger(selectedSkill));
-            foreach (var item in hitEnemies)
+            if (selectedSkill != null)
             {
-                Debug.Log("Skill hitted");
+                Debug.Log(selectedSkill.skillName);
+                animator.SetTrigger(GetSkillAnimationTrigger(selectedSkill));
+                foreach (var item in hitEnemies)
+                {
+                    Debug.Log("Skill hitted");
+                }
+
+                yield return new WaitForSeconds(selectedSkill.cooldown);
+
+                EndSkillAction();
             }
 
-            yield return new WaitForSeconds(selectedSkill.cooldown);
-
-            EndSkillAction();
         }
     }
 
@@ -152,14 +161,45 @@ public class PlayerCombo : RepeatMonoBehaviour
     private IEnumerator ResetComboAfterDelay()
     {
         yield return new WaitForSeconds(0.5f);
+
         isAttackCombo = false;
         resetComboCoroutine = null;
         isAttaking = false;
+        if (!isAttaking)
+        {
+            StartCoroutine(StaminaControl());
+        }
+
     }
 
+    private IEnumerator StaminaControl()
+    {
+        if (PlayerSingleton.Instance.IsOutOfStamina())
+        {
+            yield return new WaitForSeconds(2.0f);
+        }
+        StartCoroutine(ResetStamina());
+    }
+    private IEnumerator ResetStamina()
+    {
+
+        while (!PlayerSingleton.Instance.IsFullStamina())
+        {
+            PlayerSingleton.Instance.AddStamina(1);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
 
     private void DeadHandler()
     {
         Debug.Log("Dead");
+        spriteRenderer.color = new Color(0xFF, 0x9A, 0x9A, 0xFF);
+        //this.gameObject.transform.rotation.z += 90;
+        boxCollider.enabled = false;
+    }
+
+    private IEnumerator Dead()
+    {
+        yield return new WaitForSeconds(1.5f);
     }
 }

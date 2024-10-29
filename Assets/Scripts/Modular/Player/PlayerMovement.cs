@@ -52,6 +52,7 @@ public class PlayerMovement : AbsMovement
         rigidbody2D.gravityScale = 0f;
         float facingDirection = Mathf.Sign(Mathf.Cos(transform.parent.rotation.eulerAngles.y * Mathf.Deg2Rad));
         rigidbody2D.velocity = new Vector2(facingDirection * dashingVelocity, 0f);
+        PlayerSingleton.Instance.DeductStamina(20);
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;
         rigidbody2D.gravityScale = 1f;
