@@ -9,7 +9,7 @@ public static class JsonService
 {
     public static bool SaveData<T>(string relativePath, T data)
     {
-        string dataPath = Application.dataPath + relativePath;
+        string dataPath = Application.persistentDataPath + relativePath;
         string json  = JsonConvert.SerializeObject(data);
         try
         {
@@ -38,7 +38,7 @@ public static class JsonService
 
     public static T LoadData<T>(string relativePath)
     {
-        string path = Application.dataPath + relativePath;
+        string path = Application.persistentDataPath + relativePath;
         if (!File.Exists(path))
         {
 #if UNITY_EDITOR

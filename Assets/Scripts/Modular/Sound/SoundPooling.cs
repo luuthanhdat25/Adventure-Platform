@@ -62,5 +62,10 @@ namespace Sound
         {
             soundEmitterPool.ForEach(soundEmitter => soundEmitter.Stop());
         }
+
+        public void DebugEven()
+        {
+            Debug.Log("is pressed");
+        }
     }
 }

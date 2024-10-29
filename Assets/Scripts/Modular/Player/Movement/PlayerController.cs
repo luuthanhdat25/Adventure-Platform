@@ -22,7 +22,7 @@ public class PlayerController : AbsController
     [SerializeField]
     private float groundCheckRadius = 0.2f;
 
-    [SerializeField] 
+    [SerializeField]
     private SkillTreeUI skillTreeUI;
 
     private PlayerMovement playerMovement;
@@ -77,7 +77,9 @@ public class PlayerController : AbsController
 
     private bool CanMove()
     {
-        return !isOpenTabUpgrade && !playerCombo.isAttaking && !playerCombo.isPerformingSkill;
+        return !isOpenTabUpgrade
+            && !playerCombo.isAttaking
+            && !playerCombo.isPerformingSkill;
     }
 
     private bool CanFlip(float inputX)
@@ -87,22 +89,28 @@ public class PlayerController : AbsController
 
     private bool CanDash()
     {
-        return !isOpenTabUpgrade;
+        return !isOpenTabUpgrade
+            && !PlayerSingleton.Instance.IsOutOfStamina();
     }
 
     private bool CanAttack()
     {
-        return !isOpenTabUpgrade && IsGround() && !playerCombo.isPerformingSkill;
+        return !isOpenTabUpgrade && IsGround()
+            && !playerCombo.isPerformingSkill
+            && !PlayerSingleton.Instance.IsOutOfStamina();
     }
 
     private bool CanJump()
     {
-        return jumpCount < 2 && !playerCombo.isAttaking && !playerCombo.isPerformingSkill;
+        return jumpCount < 2 && !playerCombo.isAttaking
+            && !playerCombo.isPerformingSkill;
     }
 
     private bool CanPerformSkill()
     {
-        return !isOpenTabUpgrade && IsGround() && !playerCombo.isAttaking;
+        return !isOpenTabUpgrade && IsGround()
+            && !playerCombo.isAttaking
+            && !PlayerSingleton.Instance.IsOutOfStamina();
     }
 
     private void FlipCharacter()

@@ -35,7 +35,6 @@ public class GroundEnemyController : EnemyController
 			var beAttackController = enemy.GetComponent<AbsController>();
 			if (beAttackController != null)
 			{
-				Debug.Log("We hit " + enemy.name);
 				AbsDamageSender.CollisionWithController(beAttackController);
 			}
 		}

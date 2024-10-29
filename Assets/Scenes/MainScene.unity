@@ -190,6 +190,7 @@ MonoBehaviour:
   winGameSoundSO: {fileID: 11400000, guid: 1e569a826da898743b37ef927dbc7171, type: 2}
   loseGameSoundSO: {fileID: 11400000, guid: 2fcbd3b45b862df46ac0221fa6a34b26, type: 2}
   gameMusicBackgroundSO: {fileID: 11400000, guid: f5d26b05eac5abf42bfda7748281e37c, type: 2}
+  demosound: {fileID: 11400000, guid: cfd3d078f58996f469292f3c1e6a4cdd, type: 2}
 --- !u!4 &87281535
 Transform:
   m_ObjectHideFlags: 0
@@ -913,7 +914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4.9000244, y: 0}
+  m_AnchoredPosition: {x: 4.9001465, y: 0}
   m_SizeDelta: {x: 36.23, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &589284837
@@ -2172,7 +2173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 58.108, y: 0}
+  m_AnchoredPosition: {x: 58.10791, y: 0}
   m_SizeDelta: {x: -116.22, y: 35.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1557010113
@@ -2412,7 +2413,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 57.899994, y: -0.00000095367}
+  m_AnchoredPosition: {x: 57.899902, y: -0.00000095367}
   m_SizeDelta: {x: 115.8, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1660610228
@@ -2548,7 +2549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 46.04364}
+  m_AnchoredPosition: {x: 0, y: 46.04358}
   m_SizeDelta: {x: 266.35, y: 50.97}
   m_Pivot: {x: 0.5, y: 0.37490007}
 --- !u!114 &1718385479

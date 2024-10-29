@@ -11,10 +11,7 @@ public class SkillController : RepeatMonoBehaviour
 
     private SkillRepository _skillRepository;
 
-    public SkillController()
-    {
-        _skillRepository = new SkillRepository(SKILLDATA_PATH);
-    }
+
 
     public void Start()
     {
@@ -31,9 +28,6 @@ public class SkillController : RepeatMonoBehaviour
     {
         _skillRepository.SaveCurrentSkill(SkillSO.FromSkillSO(skillAbility));
     }
-
-
-
 
     public Task<SkillDTO> GetCurrentSKill()
     {

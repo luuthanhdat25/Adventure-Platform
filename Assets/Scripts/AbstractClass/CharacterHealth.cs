@@ -48,10 +48,9 @@ namespace AbstractClass
 
         public override void Deduct(int hpDeduct)
         {
-
             if (IsDead()) return;
-            
-            Debug.Log("Deuct: " + hpDeduct);
+            Debug.Log("get this current: " + GetCurrentHp());
+
             this.hpCurrent -= hpDeduct;
             CallOnHealthChangedEvent(hpCurrent);
             this.CheckIsDead();
