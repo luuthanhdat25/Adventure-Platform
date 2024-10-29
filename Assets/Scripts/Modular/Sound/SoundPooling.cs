@@ -8,9 +8,13 @@ namespace Sound
     public class SoundPooling : Singleton<SoundPooling>
     {
         private List<SoundEmitter> soundEmitterPool = new();
+        private List<SoundEmitter> soundEmitterPool = new();
 
         [SerializeField]
+        [SerializeField]
         private SoundEmitter soundEmitterPrefab;
+
+        [SerializeField]
 
         [SerializeField]
         private int maxPoolSize = 100;
