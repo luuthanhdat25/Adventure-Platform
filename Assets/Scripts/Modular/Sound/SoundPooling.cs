@@ -8,10 +8,14 @@ namespace Sound
     public class SoundPooling : Singleton<SoundPooling>
     {
         private List<SoundEmitter> soundEmitterPool = new();
+        private List<SoundEmitter> soundEmitterPool = new();
 
+        [SerializeField]
         [SerializeField]
         private SoundEmitter soundEmitterPrefab;
 
+
+        [SerializeField]
 
         [SerializeField]
         private int maxPoolSize = 100;
@@ -62,6 +66,11 @@ namespace Sound
         public void StopAll()
         {
             soundEmitterPool.ForEach(soundEmitter => soundEmitter.Stop());
+        }
+
+        public void DebugEven()
+        {
+            Debug.Log("is pressed");
         }
     }
 }
