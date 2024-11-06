@@ -9,8 +9,9 @@ namespace Manager
     public class InputManager : Singleton<InputManager>
     {
         public Action OnSwitchGun;
+        public Action OnOpenSetting;
+        public Action OnCloseSetting;
 
-        
 
         private PlayerInputAction inputSystemSetting;
 
@@ -34,7 +35,7 @@ namespace Manager
 
         private void Start()
         {
-            inputSystemSetting.Player.SwitchGun.performed += (InputAction.CallbackContext context) =>  OnSwitchGun?.Invoke();
+            inputSystemSetting.Player.SwitchGun.performed += (InputAction.CallbackContext context) => OnSwitchGun?.Invoke();
             inputSystemSetting.UI.Escape.performed += (InputAction.CallbackContext context) => GameManager.Instance.TogglePauseGame();
         }
 
@@ -45,16 +46,18 @@ namespace Manager
             return inputVector;
         }
 
-        public bool IsDashInputTrigger() =>inputSystemSetting.Player.Dash.IsPressed();
+        public bool IsDashInputTrigger() => inputSystemSetting.Player.Dash.IsPressed();
 
-       
+
 
         public bool IsJumpInputTrigger() => IsInputTriggered("Jump", inputSystemSetting.Player.Jump.IsPressed());
-        
+
         public bool IsTabIsOpenedPressed() => IsInputTriggered("OpenTabMenu", inputSystemSetting.Player.OpenTabMenu.IsPressed());
-        public bool IsEscapes() => IsInputTriggered("Openpause", inputSystemSetting.Player.PauseGame.IsPressed());
-        public bool IsAttackPressed() => 
-            // IsInputTriggered("Attack",
+
+        private bool isGamePaused = false;
+        public bool IsEscapes() => IsInputTriggered("Escaped", inputSystemSetting.Player.PauseGame.IsPressed());
+        public bool IsAttackPressed() =>
+                // IsInputTriggered("Attack",
                 inputSystemSetting.Player.Attack.IsPressed()
                 // )
                 ;
@@ -63,8 +66,8 @@ namespace Manager
 
         public bool IsShootPressed() => inputSystemSetting.Player.Shoot.IsPressed();
 
-        public bool IsPerformSkillPressed()=> inputSystemSetting.Player.PerformSkill.IsPressed(); 
-        
+        public bool IsPerformSkillPressed() => inputSystemSetting.Player.PerformSkill.IsPressed();
+
         private bool IsInputTriggered(string actionName, bool isPressed)
         {
             if (!inputStates.ContainsKey(actionName))
@@ -82,8 +85,8 @@ namespace Manager
             inputStates[actionName] = isPressed;
             return false;
         }
-       
-        
+
+
 
         /// <summary>
         /// The current Pointer coordinates in window space

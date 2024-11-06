@@ -23,7 +23,6 @@ namespace Manager
         [SerializeField]
         private SoundSO gameMusicBackgroundSO;
 
-        [SerializeField] private SoundSO demosound;
 
         public class OnStateChangedEventArgs : EventArgs {
             public GameState NewGameState;
@@ -68,7 +67,6 @@ namespace Manager
 
         private void FixedUpdate()
         {
-
             if (InputManager.Instance.IsEscapes())
             {
                 TogglePauseGame();

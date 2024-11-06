@@ -193,7 +193,6 @@ GameObject:
   - component: {fileID: 6553416882715513904}
   - component: {fileID: 5838404306923752013}
   - component: {fileID: 3230283211748497996}
-  - component: {fileID: 4401043378741857519}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -218,6 +217,7 @@ Transform:
   - {fileID: 2715189465727217348}
   - {fileID: 6562610416698500820}
   - {fileID: 3704186673842788163}
+  - {fileID: 65321778449527709}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2779888537762629198
@@ -483,18 +483,54 @@ MonoBehaviour:
   playerStat: {fileID: 11400000, guid: 509d2b43d589c784a8145228e3ec4531, type: 2}
   _playerHealth: {fileID: 2972986599177787947}
   _expHandler: {fileID: 3444068292105413729}
---- !u!114 &4401043378741857519
+--- !u!1 &7872422708875901864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 65321778449527709}
+  - component: {fileID: 6201412395506282405}
+  m_Layer: 3
+  m_Name: Sound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &65321778449527709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7872422708875901864}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7015312382823505023}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6201412395506282405
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4000012084707070049}
+  m_GameObject: {fileID: 7872422708875901864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b14e2e9de5224ec41b486abee91c4f8d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b59b66e13fcafb4aac53e48ec7b62aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slashSound: {fileID: 11400000, guid: 0daed2cb9088ba94ca23e4de1c4dc79b, type: 2}
+  gotHitSound: {fileID: 11400000, guid: b189e204ad026b946bb071724798a827, type: 2}
+  playerHealth: {fileID: 2972986599177787947}
+  playerCombo: {fileID: 7177969705623208823}
 --- !u!1 &9181595445082924973
 GameObject:
   m_ObjectHideFlags: 0

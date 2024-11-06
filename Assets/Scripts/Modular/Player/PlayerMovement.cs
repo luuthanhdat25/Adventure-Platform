@@ -1,28 +1,27 @@
 ﻿using AbstractClass;
+using System;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : AbsMovement
 {
-    
-    [SerializeField] 
-    private float jumpForce = 5f;
-    
-    [SerializeField] 
-    private LayerMask groundLayer;
-    
-    [SerializeField] 
-    private float dashingVelocity, dashingTime, dashCooldown;
-    
-    [SerializeField] 
-    private float checkGround;
-    
-    [SerializeField] 
-    private Rigidbody2D rigidbody2D;
+
+    [SerializeField] private float jumpForce = 5f;
+
+    [SerializeField] private LayerMask groundLayer;
+
+    [SerializeField] private float dashingVelocity, dashingTime, dashCooldown;
+
+    [SerializeField] private float checkGround;
+
+    [SerializeField] private Rigidbody2D rigidbody2D;
 
     private bool isJumping, canDash = true;
     private bool isDashing = false;
     public bool IsDashing => isDashing;
+    public Action onDash;
+    public Action onJump;
 
     public Vector2 GetVelocity() => rigidbody2D.velocity;
 
@@ -30,6 +29,7 @@ public class PlayerMovement : AbsMovement
     {
         if (inputY > 0)
         {
+            onJump.Invoke();
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, jumpForce);
         }
     }
@@ -42,6 +42,7 @@ public class PlayerMovement : AbsMovement
     public void Dash()
     {
         if (!canDash) return;
+        onDash.Invoke();
         StartCoroutine(DashCoroutine());
     }
 

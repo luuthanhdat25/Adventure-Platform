@@ -26,6 +26,7 @@ public class PlayerCombo : RepeatMonoBehaviour
     private SpriteRenderer spriteRenderer;
     public bool isAttaking;
     private BoxCollider2D boxCollider;
+    public Action OnSlash;
 
 
     public void Start()
@@ -64,6 +65,7 @@ public class PlayerCombo : RepeatMonoBehaviour
     {
         PlayerSingleton.Instance.DeductStamina(10);
         isAttackCombo = false;
+        OnSlash.Invoke();
         combo++;
         if (combo == 3)
             EndCombo();

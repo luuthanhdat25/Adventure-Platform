@@ -82,7 +82,10 @@ public class PlayerSingleton : Singleton<PlayerSingleton>
         CallOnExpChangedEvent();
     }
     public int GetHealth() => currentHealth;
-
+    public void Reborn()
+    {
+       _playerHealth.Reborn();
+    }
     public float GetHealthPersen() => (float)currentHealth / maxHealth;
 
     public float GetMaxStamina() => (float)currentHealth / maxHealth;

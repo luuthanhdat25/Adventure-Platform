@@ -13,7 +13,7 @@ public class PlayerStatsUI : MonoBehaviour
     [SerializeField] private Slider staminaBar;
 
     [SerializeField] private Slider expBar;
-
+    [SerializeField] private Button RebornButton;
     [SerializeField] 
     private PlayerHealth characterHealth;
 
@@ -22,6 +22,7 @@ public class PlayerStatsUI : MonoBehaviour
         characterHealth.OnHealthChanged += CharacterHealth_OnHealthChanged;
         PlayerSingleton.Instance.OnStaminaChanged += CharacterStamina_OnStaminaChanged;
         PlayerSingleton.Instance.OnExpChanged += CharacterExp_OnExpChanged;
+        RebornButton.onClick.AddListener(RebornUI);
     }
 
     private void CharacterExp_OnExpChanged(object sender, PlayerSingleton.OnExperienceChangedEventArgs e)
@@ -42,6 +43,11 @@ public class PlayerStatsUI : MonoBehaviour
     public void UpdateHealthBar(float healthPersent)
     {
         healthBar.value = healthPersent;
+    }
+
+    public void RebornUI()
+    {
+        PlayerSingleton.Instance.Reborn();
     }
 
     public void UpdateExpBar(float expPersen)
